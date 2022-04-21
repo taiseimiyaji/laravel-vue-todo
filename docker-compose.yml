@@ -14,9 +14,9 @@ services:
       - DB_CONNECTION=mysql
       - DB_HOST=db
       - DB_PORT=3306
-      - DB_DATABASE=${DB_NAME}
-      - DB_USERNAME=${DB_USER}
-      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_DATABASE=mysql
+      - DB_USERNAME=user
+      - DB_PASSWORD=secret
       - "TZ=Asia/Tokyo"
 
   web:
@@ -24,7 +24,7 @@ services:
       context: .
       dockerfile: ./docker/nginx/Dockerfile
     ports:
-      - ${WEB_PORT}:80
+      - "8080:80"
     depends_on:
       - app
     volumes:
@@ -34,13 +34,14 @@ services:
     build:
       context: .
       dockerfile: ./docker/mysql/Dockerfile
+    platform: linux/x86_64 #M1 Mac向け対応
     ports:
-      - ${DB_PORT}:3306
+      - "3306"
     environment:
-      MYSQL_DATABASE: ${DB_NAME}
-      MYSQL_USER: ${DB_USER}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: mysql
+      MYSQL_USER: user
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: secret
       TZ: 'Asia/Tokyo'
     volumes:
       - mysql-volume:/var/lib/mysql
