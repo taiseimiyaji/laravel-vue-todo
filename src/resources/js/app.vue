@@ -1,18 +1,12 @@
 <template>
-  <div>{{ hello }}</div>
+  <task-card />
 </template>
 
 <script lang="ts">
-import { ref } from "vue";
-export default {
-  setup() {
-      const hello = ref(
-          "Hello From TypeScript"
-      )
+import TaskCard from "./components/TaskCard.vue";
 
-      return {
-          hello
-      }
-  },
+export default {
+  components: { TaskCard },
+  setup() {},
 };
 </script>
