@@ -17212,20 +17212,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _components_TaskCard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/TaskCard */ "./resources/js/components/TaskCard.vue");
-
+/* harmony import */ var _components_TaskCard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/TaskCard.vue */ "./resources/js/components/TaskCard.vue");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    TaskCard: _components_TaskCard__WEBPACK_IMPORTED_MODULE_1__["default"]
+    TaskCard: _components_TaskCard_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  setup: function setup() {
-    var hello = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)("Hello From TypeScript!");
-    return {
-      hello: hello
-    };
-  }
+  setup: function setup() {}
 });
 
 /***/ }),
@@ -17243,13 +17236,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_TaskCard = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("TaskCard");
+  var _component_task_card = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("task-card");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.hello), 1
-  /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TaskCard)], 64
-  /* STABLE_FRAGMENT */
-  );
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_task_card);
 }
 
 /***/ }),
@@ -17269,6 +17258,37 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/InputTextForm.vue?vue&type=script&lang=js":
+/*!*******************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/InputTextForm.vue?vue&type=script&lang=js ***!
+  \*******************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "inputTextForm",
+  data: function data() {
+    return {
+      input: ""
+    };
+  },
+  props: {
+    placeholder: {
+      type: String
+    }
+  },
+  methods: {
+    submit: function submit() {
+      this.$emit("update", this.input);
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/TaskCard.vue?vue&type=script&lang=js":
 /*!**************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/TaskCard.vue?vue&type=script&lang=js ***!
@@ -17279,12 +17299,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _InputTextForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./InputTextForm */ "./resources/js/components/InputTextForm.vue");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'TaskCard',
-  components: {},
+  components: {
+    InputTextForm: _InputTextForm__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {
-      name: "sampletask",
+      id: 1,
+      category_id: 1,
+      name: '',
       detail: "taskdetail",
       deadline: "1/1",
       label: "test",
@@ -17293,6 +17319,44 @@ __webpack_require__.r(__webpack_exports__);
     };
   }
 });
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/InputTextForm.vue?vue&type=template&id=b26ec0c0":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/InputTextForm.vue?vue&type=template&id=b26ec0c0 ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+var _hoisted_1 = {
+  "class": "form-group"
+};
+var _hoisted_2 = ["placeholder"];
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("form", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <label for=\"input\">{{ input }}</label>ß "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+    onSubmit: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {}, ["prevent"]))
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "text",
+    onKeypress: _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function () {
+      return $options.submit && $options.submit.apply($options, arguments);
+    }, ["enter"])),
+    "class": "form-control",
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+      return _ctx.input = $event;
+    }),
+    placeholder: $props.placeholder
+  }, null, 40
+  /* PROPS, HYDRATE_EVENTS */
+  , _hoisted_2), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.input]])], 32
+  /* HYDRATE_EVENTS */
+  )])]);
+}
 
 /***/ }),
 
@@ -17312,19 +17376,56 @@ var _hoisted_1 = {
   "class": "taskcard"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_input_text_form = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("input-text-form");
+
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, "タスク名 : " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.name), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, "タスク詳細 : " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.detail), 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_input_text_form, {
+    onUpdate: _cache[0] || (_cache[0] = function ($event) {
+      return _ctx.name = $event;
+    }),
+    placeholder: "Enter TaskName"
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, "タスク詳細 : " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.detail), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, "期限 : " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.deadline), 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_input_text_form, {
+    onUpdate: _cache[1] || (_cache[1] = function ($event) {
+      return _ctx.detail = $event;
+    }),
+    placeholder: "Enter TaskDetail"
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, "期限 : " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.deadline), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, "ラベル : " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.label), 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_input_text_form, {
+    onUpdate: _cache[2] || (_cache[2] = function ($event) {
+      return _ctx.deadline = $event;
+    }),
+    placeholder: "Enter Deadline"
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, "ラベル : " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.label), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, "コスト : " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.costs), 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_input_text_form, {
+    onUpdate: _cache[3] || (_cache[3] = function ($event) {
+      return _ctx.label = $event;
+    }),
+    placeholder: "Enter Label"
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, "コスト : " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.costs), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, "ToDo : " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.todos), 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_input_text_form, {
+    onUpdate: _cache[4] || (_cache[4] = function ($event) {
+      return _ctx.costs = $event;
+    }),
+    placeholder: "Enter Costs"
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, "ToDo : " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.todos), 1
   /* TEXT */
-  )]);
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_input_text_form, {
+    onUpdate: _cache[5] || (_cache[5] = function ($event) {
+      return _ctx.todos.push($event);
+    }),
+    placeholder: "Enter Todo"
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    type: "button",
+    onClick: _cache[6] || (_cache[6] = function ($event) {
+      return _ctx.todos.pop();
+    })
+  }, "削除")]);
 }
 
 /***/ }),
@@ -17794,6 +17895,33 @@ if (false) {}
 
 /***/ }),
 
+/***/ "./resources/js/components/InputTextForm.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/components/InputTextForm.vue ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _InputTextForm_vue_vue_type_template_id_b26ec0c0__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./InputTextForm.vue?vue&type=template&id=b26ec0c0 */ "./resources/js/components/InputTextForm.vue?vue&type=template&id=b26ec0c0");
+/* harmony import */ var _InputTextForm_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./InputTextForm.vue?vue&type=script&lang=js */ "./resources/js/components/InputTextForm.vue?vue&type=script&lang=js");
+/* harmony import */ var _Users_miyajitaisei_private_laravel_vue_todo_src_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+
+
+
+
+;
+const __exports__ = /*#__PURE__*/(0,_Users_miyajitaisei_private_laravel_vue_todo_src_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_InputTextForm_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_InputTextForm_vue_vue_type_template_id_b26ec0c0__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/InputTextForm.vue"]])
+/* hot reload */
+if (false) {}
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
+
+/***/ }),
+
 /***/ "./resources/js/components/TaskCard.vue":
 /*!**********************************************!*\
   !*** ./resources/js/components/TaskCard.vue ***!
@@ -17854,6 +17982,21 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/InputTextForm.vue?vue&type=script&lang=js":
+/*!***************************************************************************!*\
+  !*** ./resources/js/components/InputTextForm.vue?vue&type=script&lang=js ***!
+  \***************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_InputTextForm_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_InputTextForm_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./InputTextForm.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/InputTextForm.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
 /***/ "./resources/js/components/TaskCard.vue?vue&type=script&lang=js":
 /*!**********************************************************************!*\
   !*** ./resources/js/components/TaskCard.vue?vue&type=script&lang=js ***!
@@ -17866,6 +18009,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_TaskCard_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./TaskCard.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/TaskCard.vue?vue&type=script&lang=js");
  
+
+/***/ }),
+
+/***/ "./resources/js/components/InputTextForm.vue?vue&type=template&id=b26ec0c0":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/InputTextForm.vue?vue&type=template&id=b26ec0c0 ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_InputTextForm_vue_vue_type_template_id_b26ec0c0__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_InputTextForm_vue_vue_type_template_id_b26ec0c0__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[3]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./InputTextForm.vue?vue&type=template&id=b26ec0c0 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/InputTextForm.vue?vue&type=template&id=b26ec0c0");
+
 
 /***/ }),
 
