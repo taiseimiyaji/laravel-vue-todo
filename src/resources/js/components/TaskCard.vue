@@ -1,49 +1,42 @@
 <template>
-  <div class="taskcard">
-    <div>タスク名 : {{ name }}</div>
-    <input-text-form v-on:update='name=$event' placeholder="Enter TaskName"/>
-    <div>タスク詳細 : {{ detail }}</div>
-    <input-text-form v-on:update='detail=$event' placeholder="Enter TaskDetail"/>
-    <div>期限 : {{ deadline }}</div>
-    <input-text-form v-on:update='deadline=$event' placeholder="Enter Deadline"/>
-    <div>ラベル : {{ label }}</div>
-    <input-text-form v-on:update='label=$event' placeholder="Enter Label"/>
-    <div>コスト : {{ costs }}</div>
-    <input-text-form v-on:update='costs=$event' placeholder="Enter Costs"/>
-    <div>ToDo : {{ todos }}</div>
-    <input-text-form v-on:update='todos.push($event)' placeholder="Enter Todo"/>
-    <button type="button" v-on:click='todos.pop()'>ToDo削除</button>
-  </div>
+    <div class="taskcard">
+      <div>タスク名 : {{ this.task.name }}</div>
+      <input-text-form v-on:update="this.task.name=$event" placeholder="Enter TaskName" />
+      <div>タスク詳細 : {{ this.task.detail }}</div>
+      <input-text-form v-on:update="this.task.detail=$event" placeholder="Enter TaskDetail" />
+      <div>期限 : {{ this.task.deadline }}</div>
+      <input-text-form v-on:update="this.task.deadline=$event" placeholder="Enter Deadline" />
+      <div>ラベル : {{ this.task.label }}</div>
+      <input-text-form v-on:update="this.task.label=$event" placeholder="Enter Label" />
+      <div>コスト : {{ this.task.costs }}</div>
+      <input-text-form v-on:update="this.task.costs=$event" placeholder="Enter Costs" />
+      <div>ToDo : {{ this.task.todos }}</div>
+      <input-text-form v-on:update="this.task.todos.push($event)" placeholder="Enter Todo" />
+      <button type="button" v-on:click="this.task.todos.pop()">ToDo削除</button>
+    </div>
 </template>
 
 <script>
-import InputTextForm from './InputTextForm';
+import InputTextForm from "./InputTextForm";
 
 export default {
-  name: 'TaskCard',
+  name: "TaskCard",
   components: { InputTextForm },
-  data: function () {
-    return {
-      id: 1,
-      category_id: 1,
-      name: '',
-      detail: "",
-      deadline: "",
-      label: "",
-      costs: '',
-      todos: [],
-    };
+  props: {
+    task: {
+      type: Object,
+      required: true,
+    },
   },
 };
 </script>
 <style>
-.taskcard{
-    padding: 0.5em 1em;
-    margin: 2em 0;
-    font-weight: bold;
-    color: #000;/*文字色*/
-    background: #CCC;
-    border: solid 3px #000;/*線*/
-    border-radius: 10px;/*角の丸み*/
+.taskcard {
+  padding: 0.5rem;
+  font-weight: bold;
+  color: #000; /*文字色*/
+  background: #eee;
+  border: solid 3px #bbb; /*線*/
+  border-radius: 10px; /*角の丸み*/
 }
 </style>
