@@ -3,16 +3,21 @@ declare(strict_types=1);
 
 namespace Todo\Task\ValueObject;
 
+use Todo\Shared\Foundation\ValueObject\IntegerValue;
 
-final class TaskCost
+final class TaskCost extends IntegerValue
 {
-    public function __construct()
-    {
+    private int $value;
 
+    public function __construct(int $value)
+    {
+        $this->value = $value;
     }
 
-    protected function validate()
+    protected function validate(int $value): void
     {
-        return;
+        
     }
+
+
 }

@@ -7,6 +7,8 @@ use Todo\Shared\Foundation\ValueObject\Identifier;
 
 class TaskId extends Identifier
 {
+    private string $value;
+
     public function __construct(string $value)
     {
         $this->validate($value);
@@ -16,5 +18,10 @@ class TaskId extends Identifier
     protected function validate(): void
     {
 
+    }
+
+    public function toInt(): int
+    {
+        return (int)$this->value;
     }
 }

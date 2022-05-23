@@ -3,26 +3,24 @@ declare(strict_types=1);
 
 namespace Todo\Task\ValueObject;
 
-use DateTimeImmutable;
-
 final class Task
 {
-    private int $taskId;
+    private TaskId $taskId;
     private TaskName $taskName;
-    private string $taskLabel;
-    private int $taskCost;
-    private string $taskDeadline;
+    private TaskLabel $taskLabel;
+    private TaskCost $taskCost;
+    private TaskDeadline $taskDeadline;
     private TaskDetail $taskDetail;
-    private string $taskTodos;
+    private TaskTodos $taskTodos;
 
     public function __construct(
-        int $taskId,
+        TaskId $taskId,
         TaskName $taskName,
-        string $taskLabel,
-        int $taskCost,
-        string $taskDeadline,
+        TaskLabel $taskLabel,
+        TaskCost $taskCost,
+        TaskDeadline $taskDeadline,
         TaskDetail $taskDetail,
-        string $taskTodos
+        TaskTodos $taskTodos
     ) {
         $this->taskId = $taskId;
         $this->taskName = $taskName;
