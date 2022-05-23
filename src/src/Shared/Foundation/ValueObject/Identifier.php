@@ -14,4 +14,6 @@ abstract class Identifier
         }
         return $this->id === $id;
     }
+
+    abstract public function toInt(): int;
 }
