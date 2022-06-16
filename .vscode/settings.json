@@ -1,0 +1,15 @@
+{
+    // // 実行ファイルパス
+    "php-cs-fixer.executablePath": "~/.vscode/php-cs-fixer-v3.phar",
+    // セミコロン入力時にフォーマットする
+    "php-cs-fixer.autoFixBySemicolon": true,
+    // 破壊的なルールを許可する（strict_typesを有効にするにはtrueにする必要があります）
+    "php-cs-fixer.allowRisky": true,
+    // 保存時に自動的にフォーマットする
+    "php-cs-fixer.onsave": true,
+    "php-cs-fixer.rules": "@Symfony:risk",
+    "[php]": {
+        "editor.defaultFormatter": "junstyle.php-cs-fixer"
+    },
+    "php-cs-fixer.config": ".php-cs-fixer.dist.php"
+}
