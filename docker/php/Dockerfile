@@ -10,6 +10,8 @@ COPY --from=composer:2.0 /usr/bin/composer /usr/bin/composer
 COPY --from=node:lts /usr/local/bin /usr/local/bin
 COPY --from=node:lts /usr/local/lib /usr/local/lib
 
+RUN pecl install xdebug
+RUN docker-php-ext-enable xdebug
 RUN apt-get update && \
     apt-get -y install \
     git \
