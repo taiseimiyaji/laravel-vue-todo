@@ -12,7 +12,7 @@
     "devDependencies": {
         "@types/webpack-env": "^1.16.3",
         "@vue/compiler-sfc": "^3.2.31",
-        "axios": "^0.21",
+        "axios": "^0.21.4",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "postcss": "^8.1.14",
