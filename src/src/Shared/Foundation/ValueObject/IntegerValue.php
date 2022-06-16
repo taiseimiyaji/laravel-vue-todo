@@ -7,7 +7,7 @@ abstract class IntegerValue
 {
     private $value;
 
-    abstract public function __construct();
+    abstract public function __construct(int $values);
 
     public function toInt(): int
     {

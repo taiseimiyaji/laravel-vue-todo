@@ -14,7 +14,7 @@ final class TaskDeadline extends DateValue
         $this->value = $value;
     }
 
-    protected function validate(DateTimeImmutable $value): void
+    protected function validate(string $value): void
     {
         return;
     }
