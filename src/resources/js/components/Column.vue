@@ -15,7 +15,9 @@
 //Composition APIっていうのがあるらしい。小規模な場合は必要ないかも。
 //コンポーネントを直接配列にもつんじゃなくて、オブジェクトを配列に持ってv-forで回すらしい
 import TaskCard from "./TaskCard.vue";
-import InputTextForm from './InputTextForm'
+import InputTextForm from './InputTextForm';
+import CreateTask from '../src/Task/CreateTask/CreateTask';
+
 export default {
   name: "Column",
   components: {
@@ -24,13 +26,14 @@ export default {
   },
   data: function () {
     return {
+        createTask: new CreateTask(),
       id: 1,
       name: "columnname",
       tasks: [],
     };
   },
   methods: {
-    addTask: function () {
+    async addTask() {
       this.tasks.push({
         id: "",
         name: "",
@@ -40,6 +43,13 @@ export default {
         costs: "",
         todos: [],
       });
+      try {
+          await this.createTask.process();
+      }catch (e){
+        this.errors = e[0];
+        console.log("error!!!");
+          return false
+      }
     },
     deleteTask: function () {
       this.tasks.pop();

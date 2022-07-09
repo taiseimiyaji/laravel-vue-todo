@@ -15,7 +15,7 @@ class GetAllTask implements GetAllTaskInterface
     {
         $this->task = $task;
     }
-    public function findAll()
+    public function findAll(): TaskCollection
     {
         $taskModel = $this->task->newQuery()->get();
         return TaskCollection::fromArray($taskModel->toArray());
