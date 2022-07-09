@@ -3,26 +3,24 @@ declare(strict_types=1);
 
 namespace Todo\Task\ValueObject;
 
-use DateTimeImmutable;
-
 final class Task
 {
-    private int $taskId;
+    private TaskId $taskId;
     private TaskName $taskName;
-    private string $taskLabel;
-    private int $taskCost;
-    private string $taskDeadline;
+    private TaskLabel $taskLabel;
+    private TaskCost $taskCost;
+    private TaskDeadline $taskDeadline;
     private TaskDetail $taskDetail;
-    private string $taskTodos;
+    private TaskTodos $taskTodos;
 
     public function __construct(
-        int $taskId,
+        TaskId $taskId,
         TaskName $taskName,
-        string $taskLabel,
-        int $taskCost,
-        string $taskDeadline,
+        TaskLabel $taskLabel,
+        TaskCost $taskCost,
+        TaskDeadline $taskDeadline,
         TaskDetail $taskDetail,
-        string $taskTodos
+        TaskTodos $taskTodos
     ) {
         $this->taskId = $taskId;
         $this->taskName = $taskName;
@@ -33,6 +31,34 @@ final class Task
         $this->taskTodos = $taskTodos;
     }
 
+    public function taskId(): TaskId
+    {
+        return $this->taskId;
+    }
+    public function taskName(): TaskName
+    {
+        return $this->taskName;
+    }
+    public function taskLabel(): TaskLabel
+    {
+        return $this->taskLabel;
+    }
+    public function taskCost(): TaskCost
+    {
+        return $this->taskCost;
+    }
+    public function taskDeadline(): TaskDeadline
+    {
+        return $this->taskDeadline;
+    }
+    public function taskDetail(): TaskDetail
+    {
+        return $this->taskDetail;
+    }
+    public function taskTodos(): TaskTodos
+    {
+        return $this->taskTodos;
+    }
     protected function validate()
     {
         return;
@@ -41,10 +67,10 @@ final class Task
     public function toArray(): array
     {
         return[
-            'task_id' => (int)$this->taskId,
+            'task_id' => $this->taskId->toInt(),
             'task_name' => (string)$this->taskName,
             'task_label' => (string)$this->taskLabel,
-            'task_cost' => (int)$this->taskCost,
+            'task_cost' => $this->taskCost->toInt(),
             'task_deadline' => (string)$this->taskDeadline,
             'task_detail' => (string)$this->taskDetail,
             'task_todos' => (string)$this->taskTodos
