@@ -8,8 +8,8 @@ use PHPUnit\Framework\TestCase;
 
 class CreateTaskTest extends TestCase
 {
-    public function test__construct()
+    public function test__construct(): void
     {
-        
+
     }
 }
