@@ -1,12 +1,12 @@
 <?php
-declare(strict_types=1);
 
+declare(strict_types=1);
 namespace App\Http\Task\Query\GetAllTask;
 
 use Throwable;
-
 use App\Http\Controllers\Controller;
 use Todo\Task\Query\GetAllTask\GetAllTaskInterface;
+
 class GetAllTaskAction extends Controller
 {
     private $getAllTaskUsecase;
@@ -18,9 +18,9 @@ class GetAllTaskAction extends Controller
 
     public function __invoke()
     {
-        try{
+        try {
             $taskCollection = $this->getAllTaskUsecase->findAll();
-        } catch(Throwable $e){
+        } catch (Throwable $e) {
             throw $e;
         }
         return response()->json($taskCollection->toArray());

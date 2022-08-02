@@ -19,6 +19,7 @@
 <script>
 import InputTextForm from "./InputTextForm";
 
+
 export default {
   name: "TaskCard",
   components: { InputTextForm },
@@ -28,6 +29,17 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      errors: [],
+      // updateTaskUseCase: new UpdateTask(),
+      form: {
+        // task_id,
+        // task_name,
+        //TODO: 追加する
+      }
+    }
+  }
 };
 </script>
 <style>

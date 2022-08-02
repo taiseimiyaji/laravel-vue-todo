@@ -7,7 +7,6 @@ use ArrayIterator;
 use Countable;
 use InvalidArgumentException;
 use IteratorAggregate;
-use Traversable;
 
 class TaskCollection implements Countable, IteratorAggregate
 {
@@ -36,15 +35,15 @@ class TaskCollection implements Countable, IteratorAggregate
     public static function fromArray(array $items): self
     {
         $array = [];
-        foreach($items as $item) {
+        foreach ($items as $item) {
             $array[] = new Task(
-                (int)$item['task_id'],
+                new TaskId((string)$item['task_id']),
                 new TaskName($item['task_name']),
-                (string)$item['task_label'],
-                (int)$item['task_cost'],
-                (string)$item['task_deadline'],
+                new TaskLabel((string)$item['task_label']),
+                new TaskCost((int)$item['task_cost']),
+                new TaskDeadline((string)$item['task_deadline']),
                 new TaskDetail((string)$item['task_detail']),
-                (string)$item['task_todos']
+                new TaskTodos((string)$item['task_todos'])
             );
         }
         return new self($array);
@@ -52,8 +51,8 @@ class TaskCollection implements Countable, IteratorAggregate
 
     public function validate(array $items): void
     {
-        foreach($items as $item){
-            if(!$item instanceof Task){
+        foreach ($items as $item) {
+            if (!$item instanceof Task) {
                 throw new InvalidArgumentException('item must be Task type');
             }
         }

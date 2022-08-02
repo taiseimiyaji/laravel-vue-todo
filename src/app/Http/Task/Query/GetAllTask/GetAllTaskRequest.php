@@ -1,6 +1,6 @@
 <?php
-declare(strict_types=1);
 
+declare(strict_types=1);
 namespace App\Http\Task\Query\GetAllTask;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -12,8 +12,8 @@ class GetAllTaskRequest extends FormRequest
         return true;
     }
 
-    public function rules(): array{
+    public function rules(): array
+    {
         return [];
     }
-
 }
