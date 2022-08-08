@@ -3,41 +3,65 @@ declare(strict_types=1);
 
 namespace Todo\Task\Command\CreateTask;
 
-use Todo\Task\TaskFactory;
-use App\Adapters\Task\TaskRepository;
+use Psr\Log\LoggerInterface;
+use Todo\Task\TaskFactoryInterface;
+use Todo\Task\TaskRepositoryInterface;
 use Todo\Task\ValueObject\Task;
 
 class CreateTask implements CreateTaskInterface
 {
+    /**
+     * @var TaskFactoryInterface
+     */
+    private TaskFactoryInterface $factory;
 
-    // private $factory;
-    private $repository;
-    // private $service;
+    /**
+     * @var TaskRepositoryInterface
+     */
+    private TaskRepositoryInterface $repository;
 
+    /**
+     * @var LoggerInterface
+     */
+    private LoggerInterface $logger;
+
+    /**
+     * @param TaskFactoryInterface $factory
+     * @param TaskRepositoryInterface $repository
+     * @param LoggerInterface $logger
+     */
     public function __construct(
-        // TaskFactory $factory, // Factoryパターンがよくわかってない
-        TaskRepository $repository,
-        // TaskService $service  // Serviceもよくわかってない
+        TaskFactoryInterface $factory,
+        TaskRepositoryInterface $repository,
+        LoggerInterface $logger
     ) {
-        // $this->factory = $factory;
+        $this->factory = $factory;
         $this->repository = $repository;
-        // $this->service = $service;
+        $this->logger = $logger;
     }
 
-    public function process(CreateTaskInputPort $inputPort, CreateTaskOutputPort $outputPort)
+    /**
+     * @param CreateTaskInputPort $inputPort
+     * @return void
+     */
+    public function process(CreateTaskInputPort $inputPort): void
     {
-        $task = new Task(
-            $inputPort->id(),
-            $inputPort->name(),
-            $inputPort->label(),
-            $inputPort->costs(),
-            $inputPort->deadline(),
-            $inputPort->detail(),
-            $inputPort->todos()
-        );
+        $taskId = $inputPort->id();
+        $taskName = $inputPort->name();
+        $taskLabel = $inputPort->label();
+        $taskCost = $inputPort->costs();
+        $taskDeadline = $inputPort->deadline();
+        $taskDetail = $inputPort->detail();
 
+        $task =new Task(
+            $taskId,
+            $taskName,
+            $taskLabel,
+            $taskCost,
+            $taskDeadline,
+            $taskDetail,
+        );
         $this->repository->save($task);
 
-        $outputPort->output($task);
     }
 }

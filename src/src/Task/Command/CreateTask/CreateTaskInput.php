@@ -8,7 +8,6 @@ use Todo\Task\ValueObject\TaskId;
 use Todo\Task\ValueObject\TaskCost;
 use Todo\Task\ValueObject\TaskName;
 use Todo\Task\ValueObject\TaskLabel;
-use Todo\Task\ValueObject\TaskTodos;
 use Todo\Task\ValueObject\TaskDetail;
 use Todo\Task\ValueObject\TaskDeadline;
 
@@ -20,16 +19,22 @@ class CreateTaskInput implements CreateTaskInputPort
     private TaskDeadline $taskDeadline;
     private TaskLabel $taskLabel;
     private TaskCost $taskCost;
-    private TaskTodos $taskTodos;
 
+    /**
+     * @param TaskId $taskId
+     * @param TaskName $taskName
+     * @param TaskDetail $taskDetail
+     * @param TaskDeadline $taskDeadline
+     * @param TaskLabel $taskLabel
+     * @param TaskCost $taskCost
+     */
     public function __construct(
         TaskId $taskId,
         TaskName $taskName,
         TaskDetail $taskDetail,
         TaskDeadline $taskDeadline,
         TaskLabel $taskLabel,
-        TaskCost $taskCost,
-        TaskTodos $taskTodos
+        TaskCost $taskCost
     )
     {
         $this->taskId = $taskId;
@@ -38,7 +43,6 @@ class CreateTaskInput implements CreateTaskInputPort
         $this->taskDeadline = $taskDeadline;
         $this->taskLabel = $taskLabel;
         $this->taskCost = $taskCost;
-        $this->taskTodos = $taskTodos;
     }
 
     public function id(): TaskId
@@ -69,10 +73,5 @@ class CreateTaskInput implements CreateTaskInputPort
     public function costs(): TaskCost
     {
         return $this->taskCost;
-    }
-
-    public function todos(): TaskTodos
-    {
-        return $this->taskTodos;
     }
 }

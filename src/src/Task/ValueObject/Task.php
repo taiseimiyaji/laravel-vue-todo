@@ -11,16 +11,23 @@ final class Task
     private TaskCost $taskCost;
     private TaskDeadline $taskDeadline;
     private TaskDetail $taskDetail;
-    private TaskTodos $taskTodos;
 
+    /**
+     * @param TaskId $taskId
+     * @param TaskName $taskName
+     * @param TaskLabel $taskLabel
+     * @param TaskCost $taskCost
+     * @param TaskDeadline $taskDeadline
+     * @param TaskDetail $taskDetail
+     */
     public function __construct(
         TaskId $taskId,
         TaskName $taskName,
         TaskLabel $taskLabel,
         TaskCost $taskCost,
         TaskDeadline $taskDeadline,
-        TaskDetail $taskDetail,
-        TaskTodos $taskTodos
+        TaskDetail $taskDetail
+
     ) {
         $this->taskId = $taskId;
         $this->taskName = $taskName;
@@ -28,7 +35,6 @@ final class Task
         $this->taskCost = $taskCost;
         $this->taskDeadline = $taskDeadline;
         $this->taskDetail = $taskDetail;
-        $this->taskTodos = $taskTodos;
     }
 
     public function taskId(): TaskId
@@ -55,14 +61,10 @@ final class Task
     {
         return $this->taskDetail;
     }
-    public function taskTodos(): TaskTodos
-    {
-        return $this->taskTodos;
-    }
-    protected function validate()
-    {
-        return;
-    }
+//    protected function validate()
+//    {
+//        return;
+//    }
 
     public function toArray(): array
     {
@@ -73,7 +75,6 @@ final class Task
             'task_cost' => $this->taskCost->toInt(),
             'task_deadline' => (string)$this->taskDeadline,
             'task_detail' => (string)$this->taskDetail,
-            'task_todos' => (string)$this->taskTodos
         ];
     }
 }

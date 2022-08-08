@@ -1,23 +1,29 @@
 <?php
-
 declare(strict_types=1);
 namespace App\Http\Task\Command\CreateTask;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
 use InvalidArgumentException;
+use Psr\Log\LoggerInterface;
+use RuntimeException;
 use Todo\Task\Command\CreateTask\CreateTaskInput;
 use Todo\Task\Command\CreateTask\CreateTaskInterface;
 
 class CreateTaskAction extends Controller
 {
-    private CreateTaskInterface $createTaskUsecase;
-
-    public function __construct(CreateTaskInterface $createTaskUsecase)
+    private CreateTaskInterface $useCase;
+    private LoggerInterface $logger;
+    public function __construct(
+        CreateTaskInterface $useCase,
+        LoggerInterface     $logger
+    )
     {
-        $this->createTaskUsecase = $createTaskUsecase;
+        $this->useCase = $useCase;
+        $this->logger = $logger;
     }
 
-    public function __invoke(CreateTaskRequest $request)
+    public function __invoke(CreateTaskRequest $request): JsonResponse
     {
         try {
             $createTaskInput = new CreateTaskInput(
@@ -29,11 +35,13 @@ class CreateTaskAction extends Controller
                 $request->taskCost(),
                 $request->taskTodos()
             );
-            $response = new CreateTaskResponse();
-            $this->createTaskUsecase->process($createTaskInput, $response);
+            $this->useCase->process($createTaskInput);
         } catch (InvalidArgumentException $e) {
-            throw new CreateTaskBadRequestException('create request is wrong');
+            throw new CreateTaskBadRequestException('create request is wrong', 403);
+        } catch (RuntimeException $e) {
+            $this->logger->error($e);
+            throw new RuntimeException($e->getMessage());
         }
-        return response()->json($response->task()->toArray());
+        return new JsonResponse(['Sample']);
     }
 }

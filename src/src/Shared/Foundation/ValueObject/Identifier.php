@@ -5,13 +5,11 @@ namespace Todo\Shared\Foundation\ValueObject;
 
 abstract class Identifier
 {
-    abstract protected function validate(): void;
+
+    abstract protected function validate(string $value): void;
 
     public function equals(self $id): bool
     {
-        if (!$id instanceof self) {
-            return false;
-        }
         return $this->id === $id;
     }
 

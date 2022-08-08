@@ -43,7 +43,6 @@ class TaskCollection implements Countable, IteratorAggregate
                 new TaskCost((int)$item['task_cost']),
                 new TaskDeadline((string)$item['task_deadline']),
                 new TaskDetail((string)$item['task_detail']),
-                new TaskTodos((string)$item['task_todos'])
             );
         }
         return new self($array);

@@ -10,7 +10,6 @@ use Todo\Task\ValueObject\TaskDetail;
 use Todo\Task\ValueObject\TaskId;
 use Todo\Task\ValueObject\TaskLabel;
 use Todo\Task\ValueObject\TaskName;
-use Todo\Task\ValueObject\TaskTodos;
 
 class CreateTaskRequest extends FormRequest
 {
@@ -21,7 +20,8 @@ class CreateTaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'task_name' => ['required', 'string', 'max:100'],
+            'task_id' => ['nullable', 'string'],
+            'task_name' => ['nullable', 'string', 'max:100'],
             'task_label' => ['nullable', 'string', 'max:100'],
             'task_cost' => ['nullable', 'integer'],
             'task_deadline' => ['nullable', 'string', 'max:100'],
@@ -53,9 +53,5 @@ class CreateTaskRequest extends FormRequest
     public function taskDetail(): TaskDetail
     {
         return new TaskDetail($this->get('task_detail', ''));
-    }
-    public function taskTodos(): TaskTodos
-    {
-        return new TaskTodos($this->get('task_todos', ''));
     }
 }
