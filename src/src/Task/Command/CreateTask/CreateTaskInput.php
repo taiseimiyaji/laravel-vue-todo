@@ -1,7 +1,6 @@
 <?php
 declare(strict_types=1);
 
-
 namespace Todo\Task\Command\CreateTask;
 
 use Todo\Task\ValueObject\TaskId;
@@ -45,31 +44,49 @@ class CreateTaskInput implements CreateTaskInputPort
         $this->taskCost = $taskCost;
     }
 
+    /**
+     * @return TaskId
+     */
     public function id(): TaskId
     {
         return $this->taskId;
     }
 
+    /**
+     * @return TaskName
+     */
     public function name(): TaskName
     {
         return $this->taskName;
     }
 
+    /**
+     * @return TaskDetail
+     */
     public function detail(): TaskDetail
     {
         return $this->taskDetail;
     }
 
+    /**
+     * @return TaskDeadline
+     */
     public function deadline(): TaskDeadline
     {
         return $this->taskDeadline;
     }
 
+    /**
+     * @return TaskLabel
+     */
     public function label(): TaskLabel
     {
         return $this->taskLabel;
     }
 
+    /**
+     * @return TaskCost
+     */
     public function costs(): TaskCost
     {
         return $this->taskCost;

@@ -24,7 +24,7 @@ class TaskFactory implements TaskFactoryInterface
     public function newTask(TaskId $taskId, TaskName $taskName, TaskDetail $taskDetail, TaskDeadline $taskDeadline, TaskLabel $taskLabel, TaskCost $taskCost): Task
     {
         $task = $this->task->newQuery()->create([
-        'task_id' => $taskId,
+        'task_id' => $taskId->toInt(),
         'task_name' => (string)$taskName,
         'task_label' => (string)$taskLabel,
         'task_cost' => $taskCost->toInt(),

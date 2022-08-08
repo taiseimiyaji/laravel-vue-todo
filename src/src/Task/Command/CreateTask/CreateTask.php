@@ -3,18 +3,14 @@ declare(strict_types=1);
 
 namespace Todo\Task\Command\CreateTask;
 
+use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
-use Todo\Task\TaskFactoryInterface;
+use RuntimeException;
 use Todo\Task\TaskRepositoryInterface;
 use Todo\Task\ValueObject\Task;
 
 class CreateTask implements CreateTaskInterface
 {
-    /**
-     * @var TaskFactoryInterface
-     */
-    private TaskFactoryInterface $factory;
-
     /**
      * @var TaskRepositoryInterface
      */
@@ -26,16 +22,13 @@ class CreateTask implements CreateTaskInterface
     private LoggerInterface $logger;
 
     /**
-     * @param TaskFactoryInterface $factory
      * @param TaskRepositoryInterface $repository
      * @param LoggerInterface $logger
      */
     public function __construct(
-        TaskFactoryInterface $factory,
         TaskRepositoryInterface $repository,
         LoggerInterface $logger
     ) {
-        $this->factory = $factory;
         $this->repository = $repository;
         $this->logger = $logger;
     }
@@ -46,22 +39,29 @@ class CreateTask implements CreateTaskInterface
      */
     public function process(CreateTaskInputPort $inputPort): void
     {
-        $taskId = $inputPort->id();
-        $taskName = $inputPort->name();
-        $taskLabel = $inputPort->label();
-        $taskCost = $inputPort->costs();
-        $taskDeadline = $inputPort->deadline();
-        $taskDetail = $inputPort->detail();
+        try {
+            $taskId = $inputPort->id();
+            $taskName = $inputPort->name();
+            $taskLabel = $inputPort->label();
+            $taskCost = $inputPort->costs();
+            $taskDeadline = $inputPort->deadline();
+            $taskDetail = $inputPort->detail();
 
-        $task =new Task(
-            $taskId,
-            $taskName,
-            $taskLabel,
-            $taskCost,
-            $taskDeadline,
-            $taskDetail,
-        );
-        $this->repository->save($task);
-
+            $task = new Task(
+                $taskId,
+                $taskName,
+                $taskLabel,
+                $taskCost,
+                $taskDeadline,
+                $taskDetail,
+            );
+            $this->repository->save($task);
+        } catch (InvalidArgumentException $e) {
+            $this->logger->error((string)$e);
+            throw new CreateTaskBadRequestException((string)$e);
+        } catch (RuntimeException $e) {
+            $this->logger->error((string)$e);
+            throw new FailedCreateTaskException((string)$e);
+        }
     }
 }
