@@ -10,7 +10,5 @@ Route::get('/', function () {
 
 Route::get('/task/list', GetAllTaskAction::class);
 
-Route::post('/task/list', GetAllTaskAction::class);
+Route::post('add', CreateTaskAction::class);
 
-Route::post('/task/add', CreateTaskAction::class);
-Route::post('/task/send', CreateTaskAction::class);

@@ -8,7 +8,7 @@ use Todo\Shared\Foundation\ValueObject\StringValue;
 
 final class TaskName extends StringValue
 {
-    const MAX_LENGTH = 100;
+    public const MAX_LENGTH = 100;
 
     public function __construct(string $value)
     {
@@ -18,7 +18,7 @@ final class TaskName extends StringValue
 
     protected function validate(string $value): void
     {
-        if (mb_strlen($value) === 0) {
+        if ($value === '') {
             throw new InvalidArgumentException(sprintf('%s is required.', __CLASS__));
         }
         if (mb_strlen($value) > self::MAX_LENGTH) {
