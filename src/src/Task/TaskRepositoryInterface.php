@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Todo\Task;
 
 use Todo\Task\ValueObject\Task;
+use Todo\Task\ValueObject\TaskId;
 
 interface TaskRepositoryInterface
 {
@@ -20,8 +21,8 @@ interface TaskRepositoryInterface
     public function save(Task $task): Task;
 
     /**
-     * @param Task $task
+     * @param TaskId $id
      * @return void
      */
-    public function delete(Task $task): void;
+    public function deleteById(TaskId $id): void;
 }

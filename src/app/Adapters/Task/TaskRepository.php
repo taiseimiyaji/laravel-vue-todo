@@ -7,6 +7,7 @@ use Exception;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Throwable;
 use Todo\Task\ValueObject\Task;
 use Todo\Task\ValueObject\TaskId;
 use Todo\Task\ValueObject\TaskCost;
@@ -22,12 +23,20 @@ class TaskRepository implements TaskRepositoryInterface
     private \App\Models\Task $task;
     private LoggerInterface $logger;
 
+    /**
+     * @param \App\Models\Task $task
+     * @param LoggerInterface $logger
+     */
     public function __construct(\App\Models\Task $task, LoggerInterface $logger)
     {
         $this->task = $task;
         $this->logger = $logger;
     }
 
+    /**
+     * @param int $id
+     * @return Task
+     */
     public function findById(int $id): Task
     {
         // TODO: クエリ処理
@@ -41,11 +50,15 @@ class TaskRepository implements TaskRepositoryInterface
         return $task;
     }
 
+    /**
+     * @param Task $task
+     * @return Task
+     */
     public function save(Task $task): Task
     {
         $result = $this->task->newQuery()
             ->firstOrNew([
-                'task_id' => (string)$task->taskId(),
+                'id' => (string)$task->taskId(),
             ])
             ->fill([
                 'task_name' => (string)$task->taskName(),
@@ -62,14 +75,21 @@ class TaskRepository implements TaskRepositoryInterface
         return $task;
     }
 
-    public function delete(Task $task): void
+    /**
+     * @param TaskId $id
+     * @return void
+     * @throws Throwable
+     */
+    public function deleteById(TaskId $id): void
     {
-//        // TODO: 削除処理
-//        $result = $this->task->newQuery()
-//        ->find($task->taskId())
-//        ->delete();
-//        if ($result === false){
-//            throw new RuntimeException('タスクを削除できませんでした。');
-//        };
+        // TODO: 削除処理
+        try {
+            $result = $this->task->newQuery()
+                ->where('task_id', $id->toInt())
+                ->delete();
+        } catch (Throwable $e){
+            $this->logger->error((string)$e);
+            throw $e;
+        }
     }
 }
