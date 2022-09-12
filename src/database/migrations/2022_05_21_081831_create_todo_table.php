@@ -14,7 +14,7 @@ class CreateTodoTable extends Migration
     public function up()
     {
         Schema::create('todo', function (Blueprint $table) {
-            $table->id('task_id');
+            $table->id('id');
             $table->string('task_name', 255);
             $table->string('task_label', 255)->nullable();
             $table->integer('task_cost')->nullable();
