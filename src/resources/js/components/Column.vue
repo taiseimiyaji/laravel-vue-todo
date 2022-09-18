@@ -5,6 +5,7 @@
       <input-text-form v-on:update="this.name=$event" placeholder="Enter ColumnName" />
       <button type="button" v-on:click="addTask">カード追加</button>
       <button type="button" v-on:click="deleteTask">カード削除</button>
+      <button type="button" v-on:click="createTask">カード登録</button>
     </div>
     <task-card v-for="task in tasks" :key="task.id" :task="task"></task-card>
   </div>
@@ -12,8 +13,6 @@
 
 <script>
 
-//Composition APIっていうのがあるらしい。小規模な場合は必要ないかも。
-//コンポーネントを直接配列にもつんじゃなくて、オブジェクトを配列に持ってv-forで回すらしい
 import TaskCard from "./TaskCard.vue";
 import InputTextForm from './InputTextForm';
 import CreateTask from '../src/Task/CreateTask/CreateTask';
@@ -53,6 +52,10 @@ export default {
     },
     deleteTask: function () {
       this.tasks.pop();
+    },
+    createTask(){
+      this.createTask.process();
+      console.log('send_end');
     },
   },
 };
