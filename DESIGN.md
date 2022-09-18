@@ -2,18 +2,25 @@
 
 ## 画面イメージ
 
+### taskテーブル
+   - id(ulid形式でアプリケーションコード内で生成する)
+   - name(string型のタスク名)
+   - detail(string型のタスク詳細情報)
+   - deadline(Date型のタスク期日)
+   - costs(intもしくはfloatの予定工数)
+   - status(stringタスクのステータス,statusテーブルと外部キー制約する)
 
-## 画面のコンポーネント関係
+### statusテーブル
+- id
+- ステータス(string,重複は許可しない)
 
-## タスクカード
+### treeテーブル
+閉包テーブル形式の子孫関係管理テーブル
+- ancestor(先祖)
+- descendant(子孫)
 
-### データ
-
-  - name
-  - detail
-  - deadline
-  - label
-  - costs
+PRIMARY KEYは(ancestor, descendant)に複合で貼る
+ancestor, descendantともにtaskテーブルのidに対して外部キー制約を貼る
 
 ### TODO
 タスクカードの編集機能
@@ -26,15 +33,6 @@
 
 タスクカードで工数を計測
 ポモドーロタイマーみたいにする
-labelに紐づけて計算する
-
-labelがredmineでいうプロジェクトチケットみたいな感じ。
-
- - タスクチケット
-  - ToDoチケット
-
-みたいな感じでぶら下げたい
-
 
 ## 参考
 https://zenn.dev/tasuya/articles/7d7c90f6ba2f1e
