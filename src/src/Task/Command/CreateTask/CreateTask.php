@@ -6,8 +6,8 @@ namespace Todo\Task\Command\CreateTask;
 use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
+use Todo\Task\Task;
 use Todo\Task\TaskRepositoryInterface;
-use Todo\Task\ValueObject\Task;
 
 class CreateTask implements CreateTaskInterface
 {

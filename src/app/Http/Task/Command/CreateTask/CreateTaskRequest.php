@@ -4,12 +4,12 @@ declare(strict_types=1);
 namespace App\Http\Task\Command\CreateTask;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Todo\Task\ValueObject\TaskCost;
-use Todo\Task\ValueObject\TaskDeadline;
-use Todo\Task\ValueObject\TaskDetail;
+use Todo\Task\ValueObject\Cost;
+use Todo\Task\ValueObject\Deadline;
+use Todo\Task\ValueObject\Detail;
 use Todo\Task\ValueObject\TaskId;
 use Todo\Task\ValueObject\TaskLabel;
-use Todo\Task\ValueObject\TaskName;
+use Todo\Task\ValueObject\Name;
 
 class CreateTaskRequest extends FormRequest
 {
@@ -45,11 +45,11 @@ class CreateTaskRequest extends FormRequest
     }
 
     /**
-     * @return TaskName
+     * @return Name
      */
-    public function taskName(): TaskName
+    public function taskName(): Name
     {
-        return new TaskName($this->get('task_name', ''));
+        return new Name($this->get('task_name', ''));
     }
 
     /**
@@ -61,26 +61,26 @@ class CreateTaskRequest extends FormRequest
     }
 
     /**
-     * @return TaskCost
+     * @return Cost
      */
-    public function taskCost(): TaskCost
+    public function taskCost(): Cost
     {
-        return new TaskCost($this->get('task_cost', ''));
+        return new Cost($this->get('task_cost', ''));
     }
 
     /**
-     * @return TaskDeadline
+     * @return Deadline
      */
-    public function taskDeadline(): TaskDeadline
+    public function taskDeadline(): Deadline
     {
-        return new TaskDeadline($this->get('task_deadline', ''));
+        return new Deadline($this->get('task_deadline', ''));
     }
 
     /**
-     * @return TaskDetail
+     * @return Detail
      */
-    public function taskDetail(): TaskDetail
+    public function taskDetail(): Detail
     {
-        return new TaskDetail($this->get('task_detail', ''));
+        return new Detail($this->get('task_detail', ''));
     }
 }

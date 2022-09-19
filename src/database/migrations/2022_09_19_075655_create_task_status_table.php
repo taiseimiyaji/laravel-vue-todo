@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTodoTable extends Migration
+class CreateTaskStatusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,10 @@ class CreateTodoTable extends Migration
      */
     public function up(): void
     {
-        Schema::create('task', static function (Blueprint $table) {
+        Schema::create('task_status', static function (Blueprint $table) {
             $table->char('id', 26)->primary();
-            $table->string('name', 255);
-            $table->string('detail', 1000);
-            $table->dateTime('deadline');
-            $table->integer('cost');
-            $table->string('status_id');
+            $table->string('name', 50);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -32,6 +27,6 @@ class CreateTodoTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('task');
+        Schema::dropIfExists('task_status');
     }
 }

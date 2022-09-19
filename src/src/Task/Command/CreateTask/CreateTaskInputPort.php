@@ -4,11 +4,11 @@ declare(strict_types=1);
 namespace Todo\Task\Command\CreateTask;
 
 use Todo\Task\ValueObject\TaskId;
-use Todo\Task\ValueObject\TaskCost;
-use Todo\Task\ValueObject\TaskName;
+use Todo\Task\ValueObject\Cost;
+use Todo\Task\ValueObject\Name;
 use Todo\Task\ValueObject\TaskLabel;
-use Todo\Task\ValueObject\TaskDetail;
-use Todo\Task\ValueObject\TaskDeadline;
+use Todo\Task\ValueObject\Detail;
+use Todo\Task\ValueObject\Deadline;
 
 interface CreateTaskInputPort
 {
@@ -18,19 +18,19 @@ interface CreateTaskInputPort
     public function id(): TaskId;
 
     /**
-     * @return TaskName
+     * @return Name
      */
-    public function name(): TaskName;
+    public function name(): Name;
 
     /**
-     * @return TaskDetail
+     * @return Detail
      */
-    public function detail(): TaskDetail;
+    public function detail(): Detail;
 
     /**
-     * @return TaskDeadline
+     * @return Deadline
      */
-    public function deadline(): TaskDeadline;
+    public function deadline(): Deadline;
 
     /**
      * @return TaskLabel
@@ -38,7 +38,7 @@ interface CreateTaskInputPort
     public function label(): TaskLabel;
 
     /**
-     * @return TaskCost
+     * @return Cost
      */
-    public function costs(): TaskCost;
+    public function costs(): Cost;
 }

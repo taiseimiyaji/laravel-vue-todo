@@ -6,7 +6,7 @@ namespace Todo\Task\ValueObject;
 use InvalidArgumentException;
 use Todo\Shared\Foundation\ValueObject\StringValue;
 
-final class TaskName extends StringValue
+final class Name extends StringValue
 {
     public const MAX_LENGTH = 100;
 
