@@ -44,6 +44,6 @@ abstract class StringValue
      */
     public function isEmpty(): bool
     {
-        return mb_strlen($this->value) === 0;
+        return $this->value === '';
     }
 }

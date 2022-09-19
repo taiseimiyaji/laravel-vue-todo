@@ -7,6 +7,7 @@ use ArrayIterator;
 use Countable;
 use InvalidArgumentException;
 use IteratorAggregate;
+use Todo\Task\Task;
 
 class TaskCollection implements Countable, IteratorAggregate
 {
@@ -38,11 +39,11 @@ class TaskCollection implements Countable, IteratorAggregate
         foreach ($items as $item) {
             $array[] = new Task(
                 new TaskId((string)$item['task_id']),
-                new TaskName($item['task_name']),
+                new Name($item['task_name']),
                 new TaskLabel((string)$item['task_label']),
-                new TaskCost((int)$item['task_cost']),
-                new TaskDeadline((string)$item['task_deadline']),
-                new TaskDetail((string)$item['task_detail']),
+                new Cost((int)$item['task_cost']),
+                new Deadline((string)$item['task_deadline']),
+                new Detail((string)$item['task_detail']),
             );
         }
         return new self($array);

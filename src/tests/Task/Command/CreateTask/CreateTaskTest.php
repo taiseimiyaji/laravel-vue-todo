@@ -10,15 +10,15 @@ use Tests\TestCase;
 use Todo\Task\Command\CreateTask\CreateTask;
 use Todo\Task\Command\CreateTask\CreateTaskInput;
 use Todo\Task\Command\CreateTask\CreateTaskInterface;
+use Todo\Task\Task;
 use Todo\Task\TaskFactoryInterface;
 use Todo\Task\TaskRepositoryInterface;
-use Todo\Task\ValueObject\Task;
-use Todo\Task\ValueObject\TaskCost;
-use Todo\Task\ValueObject\TaskDeadline;
-use Todo\Task\ValueObject\TaskDetail;
+use Todo\Task\ValueObject\Cost;
+use Todo\Task\ValueObject\Deadline;
+use Todo\Task\ValueObject\Detail;
 use Todo\Task\ValueObject\TaskId;
 use Todo\Task\ValueObject\TaskLabel;
-use Todo\Task\ValueObject\TaskName;
+use Todo\Task\ValueObject\Name;
 
 class CreateTaskTest extends TestCase
 {
@@ -31,11 +31,11 @@ class CreateTaskTest extends TestCase
         parent::setUp();
         $this->task = new Task(
             new TaskId('1'),
-            new TaskName('testTask'),
+            new Name('testTask'),
             new TaskLabel('testLabel'),
-            new TaskCost(1),
-            new TaskDeadline('hoge'),
-            new TaskDetail('testDetail'),
+            new Cost(1),
+            new Deadline('hoge'),
+            new Detail('testDetail'),
         );
         $this->repositoryMock = Mockery::mock(TaskRepositoryInterface::class);
         $this->factoryMock = Mockery::mock(TaskFactory::class, TaskFactoryInterface::class);
@@ -71,11 +71,11 @@ class CreateTaskTest extends TestCase
         $this->app->instance(TaskFactory::class, $this->factoryMock);
         $useCase = $this->app->make(CreateTaskInterface::class);
         $taskId = new TaskId('1');
-        $taskName = new TaskName('test');
-        $taskDetail = new TaskDetail('taskDetail');
-        $taskDeadline = new TaskDeadline('hoge');
+        $taskName = new Name('test');
+        $taskDetail = new Detail('taskDetail');
+        $taskDeadline = new Deadline('hoge');
         $taskLabel = new TaskLabel('label');
-        $taskCost = new TaskCost(1);
+        $taskCost = new Cost(1);
 
         $input = new CreateTaskInput(
             $taskId,

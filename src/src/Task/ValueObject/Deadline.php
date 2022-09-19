@@ -6,7 +6,7 @@ namespace Todo\Task\ValueObject;
 use DateTimeImmutable;
 use Todo\Shared\Foundation\ValueObject\DateValue;
 
-final class TaskDeadline extends DateValue
+final class Deadline extends DateValue
 {
     public function __construct($value)
     {

@@ -6,9 +6,8 @@ namespace Todo\Task\ValueObject;
 use InvalidArgumentException;
 use Todo\Shared\Foundation\ValueObject\Identifier;
 
-final class TaskId extends Identifier
+class StatusIdentifier extends Identifier
 {
-
     private string $id;
 
     public function __construct(string $id)
@@ -17,9 +16,9 @@ final class TaskId extends Identifier
         $this->id = $id;
     }
 
-    protected function validate(string $id): void
+    public function validate(string $id): void
     {
-        if(!$this->validateForUlid($id)) {
+        if(!$this->validateForUlid($id)){
             throw new InvalidArgumentException('%s id is invalid.', __class__);
         }
     }

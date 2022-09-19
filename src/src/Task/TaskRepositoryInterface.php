@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace Todo\Task;
 
-use Todo\Task\ValueObject\Task;
 use Todo\Task\ValueObject\TaskId;
 
 interface TaskRepositoryInterface

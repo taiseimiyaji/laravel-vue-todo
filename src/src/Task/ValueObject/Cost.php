@@ -5,7 +5,7 @@ namespace Todo\Task\ValueObject;
 
 use Todo\Shared\Foundation\ValueObject\IntegerValue;
 
-final class TaskCost extends IntegerValue
+final class Cost extends IntegerValue
 {
     private int $value;
 
@@ -16,7 +16,7 @@ final class TaskCost extends IntegerValue
 
     protected function validate(int $value): void
     {
-        
+
     }
 
 

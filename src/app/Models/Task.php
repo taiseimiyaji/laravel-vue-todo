@@ -10,16 +10,15 @@ class Task extends Model
 {
     use SoftDeletes;
 
-    protected $table = 'todo';
+    protected $table = 'task';
 
     protected $fillable = [
-        'task_id',
-        'task_name',
-        'task_label',
-        'task_cost',
-        'task_deadline',
-        'task_detail',
-        'task_todos'
+        'id',
+        'name',
+        'detail',
+        'deadline',
+        'cost',
+        'status',
     ];
 
     protected $guarded = ['id'];
