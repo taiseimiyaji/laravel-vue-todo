@@ -19,7 +19,12 @@ class StatusIdentifier extends Identifier
     public function validate(string $id): void
     {
         if(!$this->validateForUlid($id)){
-            throw new InvalidArgumentException('%s id is invalid.', __class__);
+            throw new InvalidArgumentException('%s id is invalid.', __CLASS__);
         }
+    }
+
+    public function __toString(): string
+    {
+        return $this->id;
     }
 }
