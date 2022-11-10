@@ -8,13 +8,12 @@ use Todo\Shared\Foundation\ValueObject\StringValue;
 
 class StatusName extends StringValue
 {
-    private string $name;
-    private const MAX_LENGTH = 50;
+    public const MAX_LENGTH = 50;
 
-    public function __construct(string $name)
+    public function __construct(string $value)
     {
-        $this->validate($name);
-        $this->name = $name;
+        $this->validate($value);
+        $this->value = $value;
     }
 
     protected function validate(string $value): void

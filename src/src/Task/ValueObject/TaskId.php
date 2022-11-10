@@ -9,17 +9,15 @@ use Todo\Shared\Foundation\ValueObject\Identifier;
 final class TaskId extends Identifier
 {
 
-    private string $id;
-
-    public function __construct(string $id)
+    public function __construct(string $value)
     {
-        $this->validate($id);
-        $this->id = $id;
+        $this->validate($value);
+        $this->id = $value;
     }
 
-    protected function validate(string $id): void
+    protected function validate(string $value): void
     {
-        if(!$this->validateForUlid($id)) {
+        if(!$this->validateForUlid($value)) {
             throw new InvalidArgumentException('%s id is invalid.', __class__);
         }
     }

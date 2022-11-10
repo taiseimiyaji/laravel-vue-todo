@@ -5,13 +5,13 @@ namespace Todo\Shared\Foundation\ValueObject;
 
 abstract class IntegerValue
 {
-    private $value;
+    protected int $value;
 
     abstract public function __construct(int $values);
 
     public function toInt(): int
     {
-        return (int)$this->value;
+        return $this->value;
     }
 
     abstract protected function validate(int $value): void;
