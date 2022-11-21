@@ -8,13 +8,13 @@ use Todo\Shared\Foundation\ValueObject\DateValue;
 
 final class Deadline extends DateValue
 {
-    public function __construct($value)
+    public function __construct(DateTimeImmutable $value)
     {
         $this->validate($value);
         $this->value = $value;
     }
 
-    protected function validate(string $value): void
+    protected function validate(DateTimeImmutable $value): void
     {
         return;
     }
