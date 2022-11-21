@@ -6,20 +6,21 @@ namespace Todo\Task\ValueObject;
 use InvalidArgumentException;
 use Todo\Shared\Foundation\ValueObject\Identifier;
 
+/**
+ * ULID形式のステータスID
+ */
 class StatusIdentifier extends Identifier
 {
-    private string $id;
-
     public function __construct(string $id)
     {
         $this->validate($id);
         $this->id = $id;
     }
 
-    public function validate(string $id): void
+    public function validate(string $value): void
     {
-        if(!$this->validateForUlid($id)){
-            throw new InvalidArgumentException('%s id is invalid.', __class__);
+        if(!$this->validateForUlid($value)){
+            throw new InvalidArgumentException(sprintf('%s id is invalid.', __CLASS__));
         }
     }
 }

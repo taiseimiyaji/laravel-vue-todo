@@ -13,7 +13,7 @@ abstract class Identifier
     /**
      * @var string
      */
-    private string $id;
+    protected string $id;
 
     /**
      * @param string $value
@@ -46,6 +46,9 @@ abstract class Identifier
         return $this->id === (string)$id;
     }
 
+    /**
+     * @return string
+     */
     public function __toString(): string
     {
         return $this->id;
