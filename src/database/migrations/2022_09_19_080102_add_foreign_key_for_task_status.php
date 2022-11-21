@@ -14,7 +14,10 @@ class AddForeignKeyForTaskStatus extends Migration
     public function up(): void
     {
         Schema::table('task', static function (Blueprint $table) {
-            $table->foreign('id')->references('id')->on('task_status');
+            $table->foreign('status_id')
+                ->references('id')
+                ->on('task_status')
+                ->onDelete('cascade');
         });
     }
 
@@ -26,7 +29,7 @@ class AddForeignKeyForTaskStatus extends Migration
     public function down(): void
     {
         Schema::table('task', static function (Blueprint $table){
-            $table->dropForeign('task_id_foreign');
+            $table->dropForeign('task_status_id_foreign');
         });
     }
 }
