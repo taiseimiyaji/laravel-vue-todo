@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Exceptions\BadRequestHttpException;
 use App\Http\Exceptions\InternalServerErrorHttpException;
 use Illuminate\Http\JsonResponse;
-use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Throwable;
 use Todo\Task\Command\CreateTask\CreateTaskBadRequestException;
@@ -48,12 +47,11 @@ class CreateTaskAction extends Controller
         try {
             try {
                 $createTaskInput = new CreateTaskInput(
-                    $request->taskId(),
                     $request->taskName(),
                     $request->taskDetail(),
                     $request->taskDeadline(),
-                    $request->taskLabel(),
                     $request->taskCost(),
+                    $request->statusId()
                 );
                 $this->useCase->process($createTaskInput);
             } catch (CreateTaskBadRequestException $e) {

@@ -9,6 +9,10 @@ class Status extends Model
 {
     protected $table = 'task_status';
 
+    public $incrementing = false;
+
+    protected $keyType = 'string';
+
     protected $fillable = [
         'id',
         'name',

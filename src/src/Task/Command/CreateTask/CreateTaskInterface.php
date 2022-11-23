@@ -5,5 +5,5 @@ namespace Todo\Task\Command\CreateTask;
 
 interface CreateTaskInterface
 {
-    public function process(CreateTaskInputPort $inputPort);
+    public function process(CreateTaskInputPort $input);
 }
