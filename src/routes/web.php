@@ -14,6 +14,6 @@ Route::get('/', function () {
 Route::get('/task/list', GetAllTaskAction::class);
 Route::get('/task/{id}', GetTaskQueryAction::class);
 
-Route::post('add', CreateTaskAction::class);
+
 Route::post('delete/{id}', DeleteTaskAction::class);
 
