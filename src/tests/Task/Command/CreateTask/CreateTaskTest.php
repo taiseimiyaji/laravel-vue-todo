@@ -5,19 +5,22 @@ namespace Tests\Task\Command\CreateTask;
 
 use App\Adapters\Task\TaskFactory;
 use App\Adapters\Task\TaskRepository;
+use Illuminate\Support\Facades\DB;
 use Mockery;
+use Symfony\Component\Uid\Ulid;
 use Tests\TestCase;
 use Todo\Task\Command\CreateTask\CreateTask;
 use Todo\Task\Command\CreateTask\CreateTaskInput;
 use Todo\Task\Command\CreateTask\CreateTaskInterface;
+use Todo\Task\Status;
 use Todo\Task\Task;
 use Todo\Task\TaskFactoryInterface;
 use Todo\Task\TaskRepositoryInterface;
 use Todo\Task\ValueObject\Cost;
 use Todo\Task\ValueObject\Deadline;
 use Todo\Task\ValueObject\Detail;
+use Todo\Task\ValueObject\StatusIdentifier;
 use Todo\Task\ValueObject\TaskId;
-use Todo\Task\ValueObject\TaskLabel;
 use Todo\Task\ValueObject\Name;
 
 class CreateTaskTest extends TestCase
@@ -30,12 +33,12 @@ class CreateTaskTest extends TestCase
     {
         parent::setUp();
         $this->task = new Task(
-            new TaskId('1'),
+            new TaskId(Ulid::generate()),
             new Name('testTask'),
-            new TaskLabel('testLabel'),
-            new Cost(1),
-            new Deadline('hoge'),
-            new Detail('testDetail'),
+            new Cost(0),
+            null,
+            new Detail(''),
+            new Status(Ulid::generate(), Status::STATUS_DEFAULT)
         );
         $this->repositoryMock = Mockery::mock(TaskRepositoryInterface::class);
         $this->factoryMock = Mockery::mock(TaskFactory::class, TaskFactoryInterface::class);
@@ -50,42 +53,41 @@ class CreateTaskTest extends TestCase
     }
 
     /**
+     * 正常系: 正常にタスクが作成されること
+     *
+     * ユースケース単位でのテスト。モックを使用しない。
+     *
      * @depends test__construct
      * @return void
      */
     public function testProcess(): void
     {
         $task = clone $this->task;
-//         $this->repositoryMock->shouldReceive('findById')
-        // //            ->once()
-//             ->andReturn($task);
-
-        $this->repositoryMock->shouldReceive('save')
-//            ->once()
-            ->with(Mockery::on(function (Task $arg) use ($task) {
-                $this->assertSame($task, $arg);
-                return true;
-            }));
-
-        $this->app->instance(TaskRepository::class, $this->repositoryMock);
-        $this->app->instance(TaskFactory::class, $this->factoryMock);
+        DB::beginTransaction();
         $useCase = $this->app->make(CreateTaskInterface::class);
-        $taskId = new TaskId('1');
         $taskName = new Name('test');
-        $taskDetail = new Detail('taskDetail');
-        $taskDeadline = new Deadline('hoge');
-        $taskLabel = new TaskLabel('label');
+        $taskDetail = new Detail('detail');
+        $taskDeadline = null;
         $taskCost = new Cost(1);
+        $taskStatusId = new StatusIdentifier('01GJD2P2DH49F297EDB8W89Z21');
 
         $input = new CreateTaskInput(
-            $taskId,
             $taskName,
             $taskDetail,
             $taskDeadline,
-            $taskLabel,
             $taskCost,
+            $taskStatusId
         );
 
         $useCase->process($input);
+
+        $result = DB::table('task')
+            ->first()
+            ->status_id;
+
+//        DB::commit();
+
+        $this->assertSame((string)$taskStatusId, $result);
+        DB::rollBack();
     }
 }

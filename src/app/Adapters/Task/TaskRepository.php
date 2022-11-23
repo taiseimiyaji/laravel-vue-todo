@@ -6,23 +6,32 @@ namespace App\Adapters\Task;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
 use Throwable;
+use Todo\Task\Status;
 use Todo\Task\Task;
 use Todo\Task\TaskRepositoryInterface;
+use Todo\Task\ValueObject\StatusIdentifier;
 use Todo\Task\ValueObject\TaskId;
 use TypeError;
 
 class TaskRepository implements TaskRepositoryInterface
 {
     private \App\Models\Task $task;
+    private \App\Models\Status $status;
     private LoggerInterface $logger;
 
     /**
      * @param \App\Models\Task $task
+     * @param \App\Models\Status $status
      * @param LoggerInterface $logger
      */
-    public function __construct(\App\Models\Task $task, LoggerInterface $logger)
+    public function __construct(
+        \App\Models\Task $task,
+        \App\Models\Status $status,
+        LoggerInterface $logger
+    )
     {
         $this->task = $task;
+        $this->status = $status;
         $this->logger = $logger;
     }
 
@@ -44,28 +53,44 @@ class TaskRepository implements TaskRepositoryInterface
     }
 
     /**
-     * @param Task $task
-     * @return Task
+     * @param StatusIdentifier $id
+     * @return Status
      */
-    public function save(Task $task): Task
+    public function getStatusById(StatusIdentifier $id): Status
+    {
+        $status = $this->status->newQuery()
+            ->where('id', '=', $id)
+            ->first();
+        if($status === null){
+            throw new RuntimeException('not found status', 404);
+        }
+        return new Status(
+            $status->getAttribute('id'),
+            $status->getAttribute('name')
+        );
+    }
+
+    /**
+     * @param Task $task
+     */
+    public function save(Task $task): void
     {
         $result = $this->task->newQuery()
             ->firstOrNew([
                 'id' => (string)$task->taskId(),
             ])
             ->fill([
-                'task_name' => (string)$task->taskName(),
-                'task_label' => (string)$task->taskLabel(),
-                'task_cost' => $task->taskCost()->toInt(),
-                'task_deadline' => (string)$task->taskDeadline(),
-                'task_detail' => (string)$task->taskDetail(),
+                'name' => (string)$task->name(),
+                'detail' => (string)$task->detail(),
+                'deadline' => $task->deadline(),
+                'cost' => $task->cost()->toInt(),
+                'status_id' => (string)$task->status()->id()
             ])
             ->save();
 
         if($result === false){
             throw new RuntimeException('タスクを登録できませんでした。');
         }
-        return $task;
     }
 
     /**
@@ -77,8 +102,8 @@ class TaskRepository implements TaskRepositoryInterface
     {
         // TODO: 削除処理
         try {
-            $result = $this->task->newQuery()
-                ->where('task_id', $id->toInt())
+            $this->task->newQuery()
+                ->where('id', (string)$id)
                 ->delete();
         } catch (Throwable $e){
             $this->logger->error((string)$e);

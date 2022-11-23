@@ -3,53 +3,40 @@ declare(strict_types=1);
 
 namespace Todo\Task\Command\CreateTask;
 
-use Todo\Task\ValueObject\TaskId;
 use Todo\Task\ValueObject\Cost;
-use Todo\Task\ValueObject\Name;
-use Todo\Task\ValueObject\TaskLabel;
-use Todo\Task\ValueObject\Detail;
 use Todo\Task\ValueObject\Deadline;
+use Todo\Task\ValueObject\Detail;
+use Todo\Task\ValueObject\Name;
+use Todo\Task\ValueObject\StatusIdentifier;
 
 class CreateTaskInput implements CreateTaskInputPort
 {
-    private TaskId $taskId;
     private Name $taskName;
     private Detail $taskDetail;
-    private Deadline $taskDeadline;
-    private TaskLabel $taskLabel;
+    private ?Deadline $taskDeadline;
     private Cost $taskCost;
+    private StatusIdentifier $statusId;
 
     /**
-     * @param TaskId $taskId
      * @param Name $taskName
      * @param Detail $taskDetail
-     * @param Deadline $taskDeadline
-     * @param TaskLabel $taskLabel
+     * @param Deadline|null $taskDeadline
      * @param Cost $taskCost
+     * @param StatusIdentifier $statusId
      */
     public function __construct(
-        TaskId    $taskId,
         Name      $taskName,
         Detail    $taskDetail,
-        Deadline  $taskDeadline,
-        TaskLabel $taskLabel,
-        Cost $taskCost
+        ?Deadline  $taskDeadline,
+        Cost      $taskCost,
+        StatusIdentifier $statusId
     )
     {
-        $this->taskId = $taskId;
         $this->taskName = $taskName;
         $this->taskDetail = $taskDetail;
         $this->taskDeadline = $taskDeadline;
-        $this->taskLabel = $taskLabel;
         $this->taskCost = $taskCost;
-    }
-
-    /**
-     * @return TaskId
-     */
-    public function id(): TaskId
-    {
-        return $this->taskId;
+        $this->statusId = $statusId;
     }
 
     /**
@@ -61,6 +48,22 @@ class CreateTaskInput implements CreateTaskInputPort
     }
 
     /**
+     * @return Cost
+     */
+    public function costs(): Cost
+    {
+        return $this->taskCost;
+    }
+
+    /**
+     * @return Deadline
+     */
+    public function deadline(): ?Deadline
+    {
+        return $this->taskDeadline;
+    }
+
+    /**
      * @return Detail
      */
     public function detail(): Detail
@@ -69,26 +72,10 @@ class CreateTaskInput implements CreateTaskInputPort
     }
 
     /**
-     * @return Deadline
+     * @return StatusIdentifier
      */
-    public function deadline(): Deadline
+    public function statusId(): StatusIdentifier
     {
-        return $this->taskDeadline;
-    }
-
-    /**
-     * @return TaskLabel
-     */
-    public function label(): TaskLabel
-    {
-        return $this->taskLabel;
-    }
-
-    /**
-     * @return Cost
-     */
-    public function costs(): Cost
-    {
-        return $this->taskCost;
+        return new StatusIdentifier((string)$this->statusId);
     }
 }

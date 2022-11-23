@@ -3,11 +3,13 @@ declare(strict_types=1);
 
 namespace Todo\Task\Command\CreateTask;
 
+use DateTimeImmutable;
 use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
-use Todo\Task\Task;
+use Todo\Task\TaskFactoryInterface;
 use Todo\Task\TaskRepositoryInterface;
+use Todo\Task\ValueObject\Deadline;
 
 class CreateTask implements CreateTaskInterface
 {
@@ -17,44 +19,48 @@ class CreateTask implements CreateTaskInterface
     private TaskRepositoryInterface $repository;
 
     /**
+     * @var TaskFactoryInterface
+     */
+    private TaskFactoryInterface $factory;
+
+    /**
      * @var LoggerInterface
      */
     private LoggerInterface $logger;
 
     /**
      * @param TaskRepositoryInterface $repository
+     * @param TaskFactoryInterface $factory
      * @param LoggerInterface $logger
      */
     public function __construct(
         TaskRepositoryInterface $repository,
+        TaskFactoryInterface $factory,
         LoggerInterface $logger
     ) {
         $this->repository = $repository;
+        $this->factory = $factory;
         $this->logger = $logger;
     }
 
     /**
-     * @param CreateTaskInputPort $inputPort
+     * @param CreateTaskInputPort $input
      * @return void
      */
-    public function process(CreateTaskInputPort $inputPort): void
+    public function process(CreateTaskInputPort $input): void
     {
         try {
-            $taskId = $inputPort->id();
-            $taskName = $inputPort->name();
-            $taskLabel = $inputPort->label();
-            $taskCost = $inputPort->costs();
-            $taskDeadline = $inputPort->deadline();
-            $taskDetail = $inputPort->detail();
+            // エンティティの生成
+            $task = $this->factory->createTask((string)$input->name());
 
-            $task = new Task(
-                $taskId,
-                $taskName,
-                $taskLabel,
-                $taskCost,
-                $taskDeadline,
-                $taskDetail,
-            );
+            // 各種情報を設定
+            $task->setDetail($input->detail());
+            $task->setCost($input->costs());
+            $task->setStatus($this->repository->getStatusById($input->statusId()));
+            if(!$input->deadline() === null) {
+                $task->setDeadline(new Deadline(new DateTimeImmutable()));
+            }
+
             $this->repository->save($task);
         } catch (InvalidArgumentException $e) {
             $this->logger->error((string)$e);

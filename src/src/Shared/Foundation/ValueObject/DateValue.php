@@ -13,7 +13,7 @@ abstract class DateValue
 
     public function __toString()
     {
-         return $this->value->format('Y/m/d H:i:s');
+         return $this->value->format('Y-m-d');
     }
 
     abstract protected function validate(DateTimeImmutable $value): void;
