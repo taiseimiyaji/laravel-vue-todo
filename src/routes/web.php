@@ -11,7 +11,7 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/task/list', GetAllTaskAction::class);
+
 Route::get('/task/{id}', GetTaskQueryAction::class);
 
 

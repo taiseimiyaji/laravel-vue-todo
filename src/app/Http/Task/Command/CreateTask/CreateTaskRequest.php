@@ -30,11 +30,11 @@ class CreateTaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'task_name' => ['nullable', 'string', 'max:100'],
-            'task_cost' => ['nullable', 'integer'],
-            'task_deadline' => ['nullable', 'string', 'max:100'],
-            'task_detail' => ['nullable', 'string', 'max:1000'],
-            'task_status' => ['nullable', 'string']
+            'name' => ['nullable', 'string', 'max:100'],
+            'cost' => ['nullable', 'integer'],
+            'deadline' => ['nullable', 'string', 'max:100'],
+            'detail' => ['nullable', 'string', 'max:1000'],
+            'statusId' => ['nullable', 'string']
         ];
     }
 
@@ -43,7 +43,7 @@ class CreateTaskRequest extends FormRequest
      */
     public function taskName(): Name
     {
-        return new Name($this->get('task_name', ''));
+        return new Name($this->get('name', ''));
     }
 
     /**
@@ -51,7 +51,7 @@ class CreateTaskRequest extends FormRequest
      */
     public function taskCost(): Cost
     {
-        return new Cost($this->get('task_cost', ''));
+        return new Cost((int)$this->get('cost', ''));
     }
 
     /**
@@ -60,7 +60,7 @@ class CreateTaskRequest extends FormRequest
     public function taskDeadline(): Deadline
     {
         try {
-            return new Deadline(DateTimeImmutable::createFromFormat('Y-m-d', $this->get('task_deadline', '')));
+            return new Deadline(DateTimeImmutable::createFromFormat('Y-m-d', $this->get('deadline', '')));
         } catch (\Exception $e) {
             throw new InvalidArgumentException();
         }
@@ -71,7 +71,7 @@ class CreateTaskRequest extends FormRequest
      */
     public function taskDetail(): Detail
     {
-        return new Detail($this->get('task_detail', ''));
+        return new Detail($this->get('detail', ''));
     }
 
     /**
@@ -79,6 +79,6 @@ class CreateTaskRequest extends FormRequest
      */
     public function statusId(): StatusIdentifier
     {
-        return new StatusIdentifier($this->input('status_id', ''));
+        return new StatusIdentifier($this->input('statusId', ''));
     }
 }

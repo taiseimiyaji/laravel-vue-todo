@@ -8,6 +8,9 @@ use Psr\Log\LoggerInterface;
 use Throwable;
 use Todo\Task\TaskRepositoryInterface;
 
+/**
+ * タスク削除のユースケース
+ */
 class DeleteTask implements DeleteTaskInterface
 {
     /**
@@ -20,6 +23,10 @@ class DeleteTask implements DeleteTaskInterface
      */
     private LoggerInterface $logger;
 
+    /**
+     * @param TaskRepositoryInterface $repository
+     * @param LoggerInterface $logger
+     */
     public function __construct(
         TaskRepositoryInterface $repository,
         LoggerInterface $logger
@@ -29,6 +36,10 @@ class DeleteTask implements DeleteTaskInterface
         $this->logger = $logger;
     }
 
+    /**
+     * @param DeleteTaskInputPort $input
+     * @return void
+     */
     public function process(DeleteTaskInputPort $input): void
     {
         try {

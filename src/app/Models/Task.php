@@ -12,6 +12,10 @@ class Task extends Model
 
     protected $table = 'task';
 
+    public $incrementing = false;
+
+    protected $keyType = 'string';
+
     protected $fillable = [
         'id',
         'name',

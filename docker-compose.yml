@@ -48,3 +48,13 @@ services:
       TZ: 'Asia/Tokyo'
     volumes:
       - mysql-volume:/var/lib/mysql
+
+  nuxt:
+    build:
+      context: .
+      dockerfile: ./docker/nuxt/Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - "./nuxt/todo-front:/var/www/html"
+    tty: true

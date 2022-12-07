@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Task\Command\CreateTask\CreateTaskAction;
+use App\Http\Task\Query\GetAllTask\GetAllTaskAction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,4 +19,5 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::post('add', CreateTaskAction::class);
+Route::post('task', CreateTaskAction::class);
+Route::get('task', GetAllTaskAction::class);
