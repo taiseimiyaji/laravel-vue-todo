@@ -23,8 +23,18 @@ class CreateTaskStatusTable extends Migration
         DB::table('task_status')
             ->insert(
                 [
-                    'id' => '01GJD2P2DH49F297EDB8W89Z21',
-                    'name' => 'ToDo',
+                    [
+                        'id' => '01GJD2P2DH49F297EDB8W89Z21',
+                        'name' => 'ToDo',
+                    ],
+                    [
+                        'id' => '01GJD2P2DH49F297EDB8W89Z22',
+                        'name' => 'Doing',
+                    ],
+                    [
+                        'id' => '01GJD2P2DH49F297EDB8W89Z23',
+                        'name' => 'Done',
+                    ]
                 ]
             );
     }

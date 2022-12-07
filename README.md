@@ -14,3 +14,10 @@ make up
 ```shell
 make down
 ```
+
+
+## nuxtコンテナ
+OpenSSL3のバージョン互換性の問題で下記環境変数を設定しておく必要がある。
+```shell
+export NODE_OPTIONS=--openssl-legacy-provider
+```
