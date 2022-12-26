@@ -7,7 +7,7 @@ use App\Http\Task\Query\GetAllTask\GetAllTaskAction;
 use App\Http\Task\Command\CreateTask\CreateTaskAction;
 
 
-Route::get('/', function () {
+Route::get('/', static function () {
     return view('index');
 });
 

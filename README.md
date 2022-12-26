@@ -21,3 +21,8 @@ OpenSSL3のバージョン互換性の問題で下記環境変数を設定して
 ```shell
 export NODE_OPTIONS=--openssl-legacy-provider
 ```
+
+## テスト実行
+```shell
+docker compose exec app ./vendor/bin/phpunit --filter=実行クラス名
+```

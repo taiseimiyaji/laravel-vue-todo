@@ -57,9 +57,7 @@ class CreateTask implements CreateTaskInterface
             $task->setDetail($input->detail());
             $task->setCost($input->costs());
             $task->setStatus($this->repository->getStatusById($input->statusId()));
-            if(!$input->deadline() === null) {
-                $task->setDeadline(new Deadline(new DateTimeImmutable()));
-            }
+            $task->setDeadline($input->deadline());
 
             $this->repository->save($task);
         } catch (InvalidArgumentException $e) {
