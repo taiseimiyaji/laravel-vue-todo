@@ -60,7 +60,7 @@ class CreateTaskRequest extends FormRequest
     public function taskDeadline(): Deadline
     {
         try {
-            return new Deadline(DateTimeImmutable::createFromFormat('Y-m-d', $this->get('deadline', '')));
+            return new Deadline(DateTimeImmutable::createFromFormat('Y-m-d', $this->input('deadline', '')));
         } catch (\Exception $e) {
             throw new InvalidArgumentException();
         }
