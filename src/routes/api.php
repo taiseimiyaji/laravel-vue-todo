@@ -3,6 +3,7 @@
 use App\Http\Task\Command\CreateTask\CreateTaskAction;
 use App\Http\Task\Query\GetAllStatus\GetAllStatusAction;
 use App\Http\Task\Query\GetAllTask\GetAllTaskAction;
+use App\Http\Task\Query\GetTask\GetTaskQueryAction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,3 +24,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('task', CreateTaskAction::class);
 Route::get('task', GetAllTaskAction::class);
 Route::get('status', GetAllStatusAction::class);
+Route::get('task/{id}', GetTaskQueryAction::class);

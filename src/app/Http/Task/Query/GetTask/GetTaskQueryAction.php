@@ -6,6 +6,7 @@ namespace App\Http\Task\Query\GetTask;
 use App\Http\Controllers\Controller;;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Response;
 use Psr\Log\LoggerInterface;
 use Throwable;
 use Todo\Task\Query\GetTaskQuery\GetTaskInput;
@@ -24,14 +25,18 @@ class GetTaskQueryAction extends Controller
      */
     private LoggerInterface $logger;
 
+    /**
+     * @param LoggerInterface $logger
+     * @param GetTaskQuery $query
+     */
     public function __construct
     (
-        LoggerInterface $logger,
-        GetTaskQuery $query
+        GetTaskQuery $query,
+        LoggerInterface $logger
     )
     {
-        $this->logger = $logger;
         $this->query = $query;
+        $this->logger = $logger;
     }
 
     /**
@@ -41,13 +46,23 @@ class GetTaskQueryAction extends Controller
     {
         try {
             $input = new GetTaskInput(
-                new TaskId((string)$request->id())
+                new TaskId($request->id())
             );
             $task = $this->query->process($input);
         }catch (Throwable $e){
             $this->logger->error((string)$e);
             throw $e;
         }
-        return response()->json($task);
+        return Response::json(
+            [
+                'id' => $task->id(),
+                'name' => $task->name(),
+                'cost' => $task->cost(),
+                'deadline' => $task->deadline(),
+                'detail' => $task->detail(),
+                'statusId' => $task->statusId(),
+                'statusName' => $task->statusName()
+            ]
+        );
     }
 }
