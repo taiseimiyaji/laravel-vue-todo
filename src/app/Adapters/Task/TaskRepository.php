@@ -3,12 +3,17 @@ declare(strict_types=1);
 
 namespace App\Adapters\Task;
 
+use App\Http\Exceptions\NotFoundHttpException;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
 use Throwable;
 use Todo\Task\Status;
 use Todo\Task\Task;
 use Todo\Task\TaskRepositoryInterface;
+use Todo\Task\ValueObject\Cost;
+use Todo\Task\ValueObject\Deadline;
+use Todo\Task\ValueObject\Detail;
+use Todo\Task\ValueObject\Name;
 use Todo\Task\ValueObject\StatusIdentifier;
 use Todo\Task\ValueObject\TaskId;
 use TypeError;
@@ -36,20 +41,44 @@ class TaskRepository implements TaskRepositoryInterface
     }
 
     /**
-     * @param int $id
+     * @param TaskId $id
      * @return Task
      */
-    public function findById(int $id): Task
+    public function findById(TaskId $id): Task
     {
-        // TODO: クエリ処理
+        /* @var \App\Models\Task $task */
         $task = $this->task->newQuery()
-            ->find($id);
+            ->where('id', '=', (string)$id)
+            ->first();
 
-        if(!$task instanceof Task) {
+        if (!$task) {
+            $this->logger->error('Task not found.');
+            throw new NotFoundHttpException('Task not found');
+        }
+        if (!$task instanceof Task) {
             throw new TypeError();
         }
 
-        return $task;
+        $status = $this->status->newQuery()
+            ->where('id', '=', $task->getAttribute('status_id'))
+            ->first();
+
+        if (!$status) {
+           $this->logger->error('Status not found.');
+           throw new NotFoundHttpException('Status not Found.');
+        }
+
+        return new Task(
+            new TaskId($task->getAttribute('id')),
+            new Name($task->getAttribute('name')),
+            new Cost($task->getAttribute('cost')),
+            new Deadline($task->getAttribute('deadline')),
+            new Detail($task->getAttribute('detail')),
+            new Status(
+                $status->getAttribute('id'),
+                $status->getAttribute('name')
+            ),
+        );
     }
 
     /**
