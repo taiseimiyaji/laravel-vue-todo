@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Adapters\Task;
 
 use App\Http\Exceptions\NotFoundHttpException;
+use DateTimeImmutable;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
 use Throwable;
@@ -43,6 +44,7 @@ class TaskRepository implements TaskRepositoryInterface
     /**
      * @param TaskId $id
      * @return Task
+     * @throws \Exception
      */
     public function findById(TaskId $id): Task
     {
@@ -55,7 +57,7 @@ class TaskRepository implements TaskRepositoryInterface
             $this->logger->error('Task not found.');
             throw new NotFoundHttpException('Task not found');
         }
-        if (!$task instanceof Task) {
+        if (!$task instanceof \App\Models\Task) {
             throw new TypeError();
         }
 
@@ -72,7 +74,7 @@ class TaskRepository implements TaskRepositoryInterface
             new TaskId($task->getAttribute('id')),
             new Name($task->getAttribute('name')),
             new Cost($task->getAttribute('cost')),
-            new Deadline($task->getAttribute('deadline')),
+            new Deadline(new DateTimeImmutable($task->getAttribute('deadline'))),
             new Detail($task->getAttribute('detail')),
             new Status(
                 $status->getAttribute('id'),
