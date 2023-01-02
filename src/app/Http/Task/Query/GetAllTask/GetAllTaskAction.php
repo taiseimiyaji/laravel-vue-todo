@@ -3,6 +3,7 @@
 declare(strict_types=1);
 namespace App\Http\Task\Query\GetAllTask;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Response;
 use Psr\Log\LoggerInterface;
 use Throwable;

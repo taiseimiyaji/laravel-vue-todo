@@ -9,10 +9,10 @@ use Todo\Task\ValueObject\TaskId;
 interface TaskRepositoryInterface
 {
     /**
-     * @param int $id
+     * @param TaskId $id
      * @return Task
      */
-    public function findById(int $id): Task;
+    public function findById(TaskId $id): Task;
 
     /**
      * @param StatusIdentifier $id

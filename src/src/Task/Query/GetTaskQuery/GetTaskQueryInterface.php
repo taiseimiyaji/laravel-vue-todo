@@ -3,9 +3,13 @@ declare(strict_types=1);
 
 namespace Todo\Task\Query\GetTaskQuery;
 
+use Todo\Task\Query\TaskReadModel;
+
 interface GetTaskQueryInterface
 {
-    public function construct();
-
-    public function process();
+    /**
+     * @param GetTaskInputPort $input
+     * @return TaskReadModel
+     */
+    public function process(GetTaskInputPort $input): TaskReadModel;
 }
