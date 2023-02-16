@@ -12,6 +12,7 @@ class TaskReadModel
     private string $detail;
     private string $statusId;
     private string $statusName;
+    private string $sort;
 
     /**
      * @param string $id
@@ -21,6 +22,7 @@ class TaskReadModel
      * @param string $detail
      * @param string $statusId
      * @param string $statusName
+     * @param string $sort
      */
     public function __construct(
         string $id,
@@ -29,7 +31,8 @@ class TaskReadModel
         string $deadline,
         string $detail,
         string $statusId,
-        string $statusName
+        string $statusName,
+        string $sort
     )
     {
         $this->id = $id;
@@ -39,6 +42,7 @@ class TaskReadModel
         $this->detail = $detail;
         $this->statusId = $statusId;
         $this->statusName = $statusName;
+        $this->sort = $sort;
     }
 
     public function id(): string
@@ -74,5 +78,10 @@ class TaskReadModel
     public function statusName(): string
     {
         return $this->statusName;
+    }
+
+    public function sort(): string
+    {
+        return $this->sort;
     }
 }

@@ -30,7 +30,6 @@ class GetAllTask implements GetAllTaskInterface
     {
         $taskModel = $this->task->newQuery()->get();
 
-
         return $taskModel->map(function (Task $task) {
             return new TaskReadModel(
                 $task->getAttribute('id'),
@@ -39,7 +38,8 @@ class GetAllTask implements GetAllTaskInterface
                 $task->getAttribute('deadline'),
                 $task->getAttribute('detail'),
                 $task->getAttribute('status_id'),
-                $this->status->newQuery()->where('id', '=', $task->getAttribute('status_id'))->first()->name
+                $this->status->newQuery()->where('id', '=', $task->getAttribute('status_id'))->first()->name,
+                $task->getAttribute('sort')
             );
         })->toArray();
     }

@@ -30,7 +30,6 @@ class GetAllTaskAction extends Controller
      */
     public function __invoke()
     {
-
         try {
             $tasks = $this->getAllTaskUseCase->process();
         } catch (Throwable $e) {
@@ -46,7 +45,8 @@ class GetAllTaskAction extends Controller
                     'deadline' => $task->deadline(),
                     'detail' => $task->detail(),
                     'statusId' => $task->statusId(),
-                    'statusName' => $task->statusName()
+                    'statusName' => $task->statusName(),
+                    'sort' => $task->sort()
                 ];
             }, $tasks)
         );
