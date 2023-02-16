@@ -23,6 +23,7 @@ class Task extends Model
         'deadline',
         'cost',
         'status_id',
+        'sort'
     ];
 
     protected $guarded = ['id'];
