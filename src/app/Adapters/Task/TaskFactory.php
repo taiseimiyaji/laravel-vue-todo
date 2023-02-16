@@ -5,6 +5,7 @@ namespace App\Adapters\Task;
 
 use DateTimeImmutable;
 use Symfony\Component\Uid\Ulid;
+use Todo\Task\Sort\ValueObject\Sort;
 use Todo\Task\Status;
 use Todo\Task\Task;
 use Todo\Task\TaskFactoryInterface;
@@ -30,7 +31,8 @@ class TaskFactory implements TaskFactoryInterface
             new Cost(0),
             new Deadline(new DateTimeImmutable()),
             new Detail(''),
-            new Status(Ulid::generate(), Status::STATUS_DEFAULT)
+            new Status(Ulid::generate(), Status::STATUS_DEFAULT),
+            new Sort(0)
         );
     }
 }

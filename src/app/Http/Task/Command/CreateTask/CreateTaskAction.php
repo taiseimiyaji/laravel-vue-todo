@@ -51,7 +51,8 @@ class CreateTaskAction extends Controller
                     $request->taskDetail(),
                     $request->taskDeadline(),
                     $request->taskCost(),
-                    $request->statusId()
+                    $request->statusId(),
+                    $request->sort(),
                 );
                 $this->useCase->process($createTaskInput);
             } catch (CreateTaskBadRequestException $e) {

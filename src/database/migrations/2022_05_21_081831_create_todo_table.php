@@ -20,6 +20,7 @@ class CreateTodoTable extends Migration
             $table->dateTime('deadline');
             $table->integer('cost');
             $table->string('status_id');
+            $table->integer('sort');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -6,6 +6,7 @@ namespace App\Http\Task\Command\CreateTask;
 use DateTimeImmutable;
 use Illuminate\Foundation\Http\FormRequest;
 use InvalidArgumentException;
+use Todo\Task\Sort\ValueObject\Sort;
 use Todo\Task\ValueObject\Cost;
 use Todo\Task\ValueObject\Deadline;
 use Todo\Task\ValueObject\Detail;
@@ -80,5 +81,13 @@ class CreateTaskRequest extends FormRequest
     public function statusId(): StatusIdentifier
     {
         return new StatusIdentifier($this->input('statusId', ''));
+    }
+
+    /**
+     * @return Sort
+     */
+    public function sort(): Sort
+    {
+        return new Sort((int)$this->input('sort', 0));
     }
 }

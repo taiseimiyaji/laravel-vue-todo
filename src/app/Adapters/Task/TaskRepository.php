@@ -8,6 +8,7 @@ use DateTimeImmutable;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
 use Throwable;
+use Todo\Task\Sort\ValueObject\Sort;
 use Todo\Task\Status;
 use Todo\Task\Task;
 use Todo\Task\TaskRepositoryInterface;
@@ -80,6 +81,7 @@ class TaskRepository implements TaskRepositoryInterface
                 $status->getAttribute('id'),
                 $status->getAttribute('name')
             ),
+            new Sort((int)$task->getAttribute('sort'))
         );
     }
 
@@ -115,7 +117,8 @@ class TaskRepository implements TaskRepositoryInterface
                 'detail' => (string)$task->detail(),
                 'deadline' => $task->deadline(),
                 'cost' => $task->cost()->toInt(),
-                'status_id' => (string)$task->status()->id()
+                'status_id' => (string)$task->status()->id(),
+                'sort' => $task->sort()->toInt()
             ])
             ->save();
 

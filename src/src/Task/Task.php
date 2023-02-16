@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Todo\Task;
 
+use Todo\Task\Sort\ValueObject\Sort;
 use Todo\Task\ValueObject\Cost;
 use Todo\Task\ValueObject\Deadline;
 use Todo\Task\ValueObject\Detail;
@@ -22,6 +23,7 @@ final class Task
     private ?Deadline $deadline;
     private Cost $cost;
     private Status $status;
+    private Sort $sort;
 
     /**
      * @param TaskId $id
@@ -30,6 +32,7 @@ final class Task
      * @param ?Deadline $deadline
      * @param Detail $detail
      * @param Status $status
+     * @param Sort $sort
      */
     public function __construct(
         TaskId    $id,
@@ -37,8 +40,8 @@ final class Task
         Cost      $cost,
         ?Deadline $deadline,
         Detail    $detail,
-        Status $status
-
+        Status $status,
+        Sort $sort
     ) {
         $this->id = $id;
         $this->name = $name;
@@ -46,6 +49,7 @@ final class Task
         $this->deadline = $deadline;
         $this->detail = $detail;
         $this->status = $status;
+        $this->sort = $sort;
     }
 
     public function taskId(): TaskId
@@ -74,6 +78,11 @@ final class Task
         return $this->status;
     }
 
+    public function sort(): Sort
+    {
+        return $this->sort;
+    }
+
     public function setName(Name $name): void
     {
         $this->name = $name;
@@ -99,6 +108,11 @@ final class Task
         $this->status = $status;
     }
 
+    public function setSort(Sort $sort): void
+    {
+        $this->sort = $sort;
+    }
+
     public function toArray(): array
     {
         return[
@@ -108,6 +122,7 @@ final class Task
             'deadline' => (string)$this->deadline,
             'detail' => (string)$this->detail,
             'status' => (string)$this->status->name(),
+            'sort' => $this->sort->toInt(),
         ];
     }
 }

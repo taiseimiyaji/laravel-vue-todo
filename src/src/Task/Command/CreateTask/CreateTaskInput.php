@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Todo\Task\Command\CreateTask;
 
+use Todo\Task\Sort\ValueObject\Sort;
 use Todo\Task\ValueObject\Cost;
 use Todo\Task\ValueObject\Deadline;
 use Todo\Task\ValueObject\Detail;
@@ -16,6 +17,7 @@ class CreateTaskInput implements CreateTaskInputPort
     private ?Deadline $taskDeadline;
     private Cost $taskCost;
     private StatusIdentifier $statusId;
+    private Sort $sort;
 
     /**
      * @param Name $taskName
@@ -23,13 +25,15 @@ class CreateTaskInput implements CreateTaskInputPort
      * @param Deadline|null $taskDeadline
      * @param Cost $taskCost
      * @param StatusIdentifier $statusId
+     * @param Sort $sort
      */
     public function __construct(
         Name      $taskName,
         Detail    $taskDetail,
         ?Deadline  $taskDeadline,
         Cost      $taskCost,
-        StatusIdentifier $statusId
+        StatusIdentifier $statusId,
+        Sort $sort
     )
     {
         $this->taskName = $taskName;
@@ -37,6 +41,7 @@ class CreateTaskInput implements CreateTaskInputPort
         $this->taskDeadline = $taskDeadline;
         $this->taskCost = $taskCost;
         $this->statusId = $statusId;
+        $this->sort = $sort;
     }
 
     /**
@@ -77,5 +82,13 @@ class CreateTaskInput implements CreateTaskInputPort
     public function statusId(): StatusIdentifier
     {
         return new StatusIdentifier((string)$this->statusId);
+    }
+
+    /**
+     * @return Sort
+     */
+    public function sort(): Sort
+    {
+        return new Sort($this->sort->toInt());
     }
 }

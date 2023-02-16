@@ -39,7 +39,7 @@ class GetAllTask implements GetAllTaskInterface
                 $task->getAttribute('detail'),
                 $task->getAttribute('status_id'),
                 $this->status->newQuery()->where('id', '=', $task->getAttribute('status_id'))->first()->name,
-                $task->getAttribute('sort')
+                (string)$task->getAttribute('sort')
             );
         })->toArray();
     }
