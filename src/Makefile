@@ -14,6 +14,10 @@ down:
 test:
 	@docker compose exec app ./vendor/bin/phpunit tests/
 
+.PHONY: run
+run:
+	docker compose exec nuxt npm run dev
+
 .PHONY: phpdoc
 phpdoc:
 	docker run \
