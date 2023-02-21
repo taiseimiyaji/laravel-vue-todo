@@ -28,7 +28,7 @@ class GetAllTask implements GetAllTaskInterface
      */
     public function process(): array
     {
-        $taskModel = $this->task->newQuery()->get();
+        $taskModel = $this->task->newQuery()->orderBy('sort')->get();
 
         return $taskModel->map(function (Task $task) {
             return new TaskReadModel(

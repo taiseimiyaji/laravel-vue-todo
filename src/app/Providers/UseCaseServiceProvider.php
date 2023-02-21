@@ -16,6 +16,8 @@ use Todo\Task\Query\GetAllStatus\GetAllStatusInterface;
 use Todo\Task\Query\GetAllTask\GetAllTaskInterface;
 use Todo\Task\Query\GetTaskQuery\GetTaskQuery;
 use Todo\Task\Query\GetTaskQuery\GetTaskQueryInterface;
+use Todo\Task\Sort\UpdateSort\UpdateSort;
+use Todo\Task\Sort\UpdateSort\UpdateSortInterface;
 
 class UseCaseServiceProvider extends ServiceProvider
 {
@@ -27,5 +29,6 @@ class UseCaseServiceProvider extends ServiceProvider
         $this->app->singleton(DeleteTaskInterface::class, DeleteTask::class);
         $this->app->singleton(GetTaskQueryInterface::class, GetTaskQuery::class);
         $this->app->singleton(GetAllStatusInterface::class, GetAllStatus::class);
+        $this->app->singleton(UpdateSortInterface::class, UpdateSort::class);
     }
 }

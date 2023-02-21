@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Task\Command\CreateTask\CreateTaskAction;
+use App\Http\Task\Command\UpdateSort\UpdateSortAction;
 use App\Http\Task\Command\UpdateTask\UpdateTaskAction;
 use App\Http\Task\Query\GetAllStatus\GetAllStatusAction;
 use App\Http\Task\Query\GetAllTask\GetAllTaskAction;
@@ -24,8 +25,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('task', CreateTaskAction::class);
+Route::post('task/sort', UpdateSortAction::class);
 Route::post('task/{id}', UpdateTaskAction::class);
 
 Route::get('task', GetAllTaskAction::class);
 Route::get('status', GetAllStatusAction::class);
 Route::get('task/{id}', GetTaskQueryAction::class);
+
+

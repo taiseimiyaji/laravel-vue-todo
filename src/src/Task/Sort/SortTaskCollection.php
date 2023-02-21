@@ -44,7 +44,7 @@ class SortTaskCollection extends Collection
                 return new SortTask(
                     new TaskId($attribute['id']),
                     new StatusIdentifier($attribute['statusId']),
-                    new Sort($attribute['sort'])
+                    new Sort((int)$attribute['sort'])
                 );
             }, $attributes);
         } catch(Throwable $e){
