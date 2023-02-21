@@ -24,7 +24,8 @@ class UpdateTaskRequest extends FormRequest
                 'cost' => ['nullable', 'integer'],
                 'deadline' => ['nullable', 'string', 'max:100'],
                 'detail' => ['nullable', 'string', 'max:1000'],
-                'statusId' => ['nullable', 'string']
+                'statusId' => ['nullable', 'string'],
+                'sort' => ['nullable', 'integer']
             ];
     }
 
@@ -56,5 +57,10 @@ class UpdateTaskRequest extends FormRequest
     public function statusId(): string
     {
         return $this->input('statusId');
+    }
+
+    public function sort(): int
+    {
+        return (int)$this->input('sort');
     }
 }

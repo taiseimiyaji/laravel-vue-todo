@@ -47,6 +47,7 @@ class UpdateTask implements UpdateTaskInterface
             $task->setDeadline($input->deadline());
             $task->setCost($input->costs());
             $task->setDetail($input->detail());
+            $task->setSort($input->sort());
 
             $this->repository->save($task);
         } catch (Throwable $e) {

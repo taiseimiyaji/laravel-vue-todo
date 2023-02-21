@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Todo\Task\Command\UpdateTask;
 
+use Todo\Task\Sort\ValueObject\Sort;
 use Todo\Task\ValueObject\Cost;
 use Todo\Task\ValueObject\Deadline;
 use Todo\Task\ValueObject\Detail;
@@ -41,4 +42,9 @@ interface UpdateTaskInputPort
      * @return StatusIdentifier
      */
     public function statusId(): StatusIdentifier;
+
+    /**
+     * @return Sort
+     */
+    public function sort(): Sort;
 }

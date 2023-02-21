@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Todo\Task\Command\UpdateTask;
 
+use Todo\Task\Sort\ValueObject\Sort;
 use Todo\Task\ValueObject\Cost;
 use Todo\Task\ValueObject\Deadline;
 use Todo\Task\ValueObject\Detail;
@@ -43,12 +44,18 @@ class UpdateTaskInput implements UpdateTaskInputPort
     private StatusIdentifier $statusId;
 
     /**
+     * @var Sort
+     */
+    private Sort $sort;
+
+    /**
      * @param TaskId $id
      * @param Name $name
      * @param Cost $costs
      * @param Deadline $deadline
      * @param Detail $detail
      * @param StatusIdentifier $statusId
+     * @param Sort $sort
      */
     public function __construct(
         TaskId $id,
@@ -56,7 +63,8 @@ class UpdateTaskInput implements UpdateTaskInputPort
         Cost $costs,
         Deadline $deadline,
         Detail $detail,
-        StatusIdentifier $statusId
+        StatusIdentifier $statusId,
+        Sort $sort
     )
     {
         $this->id = $id;
@@ -65,6 +73,7 @@ class UpdateTaskInput implements UpdateTaskInputPort
         $this->deadline = $deadline;
         $this->detail = $detail;
         $this->statusId = $statusId;
+        $this->sort = $sort;
     }
 
     /**
@@ -113,5 +122,13 @@ class UpdateTaskInput implements UpdateTaskInputPort
     public function statusId(): StatusIdentifier
     {
         return $this->statusId;
+    }
+
+    /**
+     * @return Sort
+     */
+    public function sort(): Sort
+    {
+        return $this->sort;
     }
 }

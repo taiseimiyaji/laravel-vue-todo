@@ -11,6 +11,7 @@ use Psr\Log\LoggerInterface;
 use Throwable;
 use Todo\Task\Command\UpdateTask\UpdateTaskInput;
 use Todo\Task\Command\UpdateTask\UpdateTaskInterface;
+use Todo\Task\Sort\ValueObject\Sort;
 use Todo\Task\ValueObject\Cost;
 use Todo\Task\ValueObject\Deadline;
 use Todo\Task\ValueObject\Detail;
@@ -57,7 +58,8 @@ class UpdateTaskAction extends Controller
                     new Cost((int)$request->cost()),
                     new Deadline(new DateTimeImmutable($request->deadline())),
                     new Detail($request->detail()),
-                    new StatusIdentifier($request->statusId())
+                    new StatusIdentifier($request->statusId()),
+                    new Sort($request->sort()),
                 );
             } catch (InvalidArgumentException $e) {
                 $this->logger->error('Task update is failed.');

@@ -81,7 +81,7 @@ class CreateTaskInput implements CreateTaskInputPort
      */
     public function statusId(): StatusIdentifier
     {
-        return new StatusIdentifier((string)$this->statusId);
+        return $this->statusId;
     }
 
     /**
@@ -89,6 +89,6 @@ class CreateTaskInput implements CreateTaskInputPort
      */
     public function sort(): Sort
     {
-        return new Sort($this->sort->toInt());
+        return $this->sort;
     }
 }
