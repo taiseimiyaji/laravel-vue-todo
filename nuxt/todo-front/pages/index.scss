@@ -1,0 +1,17 @@
+body {
+  background-color: $green;
+}
+.content {
+  padding: 1rem;
+  display: flex;
+  justify-content: left;
+  height: 100%;
+
+  .card {
+    margin: 4px;
+  }
+  .btn {
+    margin: 2px 4px;
+
+  }
+}

@@ -1,0 +1,22 @@
+.btn.create-button {
+    background: $beige;
+    opacity: 1;
+    color: $black;
+    border-color: $black;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &:active {
+      background: $beige;
+      opacity: 0.8;
+      color: $black;
+      border-color: $black;
+    }
+  &:focus-visible {
+    color: $black;
+    outline: 0;
+  }
+}
+

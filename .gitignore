@@ -1,1 +1,4 @@
 .idea
+/nuxt/todo-front/node_modules/
+/nuxt/todo-front/dist/
+/nuxt/todo-front/.nuxt/

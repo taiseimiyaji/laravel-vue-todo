@@ -1,0 +1,15 @@
+.column {
+  background-color: $gray;
+  height: 100%;
+  border-radius: 2px;
+  width: 272px;
+  margin: 0 4px;
+  padding-bottom: 8px;
+  .category-title {
+    color: white;
+    padding: 10px 8px;
+    h2 {
+      font-size: 24px;
+    }
+  }
+}
