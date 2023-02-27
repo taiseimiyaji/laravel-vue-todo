@@ -70,9 +70,6 @@ export default {
     title: {
       type: String,
     },
-    value: {
-      type: Array,
-    }
   },
   data() {
     return {
@@ -98,15 +95,17 @@ export default {
   computed: {
     tasks: {
       get: function () {
-        return this.value;
+        const id = this.id;
+        return this.$store.getters["tasks/tasks"].filter(function (item) {
+          return id === item.statusId;
+        });
       },
       set: function(value) {
         let tasks = value.map((obj) => Object.assign({}, obj));
         for (const [index, item] of tasks.entries()) {
           item.sort = index;
         }
-        this.updateSort(tasks);
-        this.$emit('input', value);
+        this.$store.commit('setTasks', tasks);
       }
     },
   },
@@ -122,10 +121,9 @@ export default {
       this.modal.show();
     },
     async createTask() {
-      const createTask = new CreateTask();
       this.task.statusId = this.id;
       this.task.sort = this.findTaskIndex(this.task);
-      await createTask.process(this.task);
+      this.$store.dispatch('tasks/addTask', this.task);
       this.modal.hide();
       this.$emit('saveTask');
     },
@@ -155,7 +153,6 @@ export default {
       this.$emit('updateSort');
     },
     findTaskIndex(task) {
-      console.log(this.tasks.findIndex(({ id }) => id === task.id));
       return this.tasks.findIndex(({ id }) => id === task.id) === -1
         ? this.tasks.length
         : this.tasks.findIndex(({ id }) => id === task.id);

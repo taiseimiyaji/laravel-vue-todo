@@ -7,6 +7,9 @@ export default {
   server: {
     host: '0.0.0.0',
   },
+  axios: {
+    proxy: true
+  },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {

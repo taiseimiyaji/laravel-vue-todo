@@ -3,6 +3,7 @@ import axios from 'axios'
 class CreateTask {
   async process(task) {
     const data = new FormData();
+    console.log(task);
     data.append('name', task.name);
     data.append('cost', task.cost);
     data.append('deadline', this.getNowDateWithString(task.deadline));

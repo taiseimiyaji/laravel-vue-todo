@@ -6,8 +6,6 @@
         :key="column.id"
         :id="column.id"
         :title="column.name"
-        :value="columns.filter(function(item){ return column.id === item.id; })[0].tasks"
-        @input="setColumnTasks(column.id, $event)"
         v-on:saveTask="fetchTask"
       />
     </div>
@@ -24,16 +22,8 @@ export default Vue.extend({
     await store.dispatch('status/fetchStatus');
   },
   computed: {
-    tasks() {
-      return this.$store.getters["tasks/tasks"];
-    },
     columns() {
-      return this.$store.getters["status/status"].map((value: { [x: string]: any; id: any; }, index: any) => {
-        value.tasks = this.tasks.filter(function(item: any){
-          return value.id === item.statusId;
-        });
-        return value;
-      });
+      return this.$store.getters["status/status"];
     }
   },
   data() {
@@ -48,17 +38,9 @@ export default Vue.extend({
     }
   },
   methods: {
-    async fetchTask () {
+    async fetchTask() {
       await this.$store.dispatch('tasks/fetchTasks');
     },
-    setColumnTasks (columnId: any, tasks: any) {
-      // this.columns.map(function (value, index){
-      //   if(columnId === value.id) {
-      //     value.tasks = tasks;
-      //   }
-      //   return value;
-      // })
-    }
   },
 })
 </script>
