@@ -133,22 +133,6 @@ export default {
     del: function () {
       this.modal.hide();
     },
-    async movedCard() {
-      const array = this.tasks.map(function(value){
-        value.statusId = this.id;
-        value.sort = array.indexOf(value);
-        return value;
-      }, this);
-      this.$store.dispatch('tasks/updateSort', array);
-    },
-    async updateSort() {
-      const array = this.tasks.map(function(value){
-        value.statusId = this.id;
-        value.sort = array.indexOf(value);
-        return value;
-      }, this);
-      this.$store.dispatch('tasks/updateSort', array);
-    },
     findTaskIndex(task) {
       return this.tasks.findIndex(({ id }) => id === task.id) === -1
         ? this.tasks.length
