@@ -9,7 +9,7 @@
     >タスク作成
     </button-create-button>
     <div>
-      <draggable v-model="tasks" tag="div" :options="{group:'tasks'}" @add="movedCard" @remove="updateSort" @update="updateSort">
+      <draggable v-model="tasks" tag="div" :options="{group:'tasks'}">
         <card-task-card
           v-for="task in tasks"
           :key="task.id"
@@ -51,9 +51,6 @@
 
 <script>
 import { Modal } from 'bootstrap';
-import CreateTask from '~/src/Command/CreateTask';
-import UpdateTask from '@/src/Command/UpdateTask';
-import UpdateSort from '@/src/Command/UpdateSort';
 import Datepicker from 'vuejs-datepicker';
 import draggable from 'vuedraggable';
 
@@ -84,18 +81,19 @@ export default {
         statusId: this.id,
         sort: '',
       },
-      taskSort: [],
       modal: null,
     };
   },
   mounted() {
     this.modal = new Modal(this.$refs.modal, {keyboard: true});
-    this.taskSort = [...this.tasks];
   },
   computed: {
     tasks: {
       get: function () {
         const id = this.id;
+        if (!this.$store.getters["tasks/tasks"]) {
+          return [];
+        }
         return this.$store.getters["tasks/tasks"].filter(function (item) {
           return id === item.statusId;
         });
@@ -103,9 +101,10 @@ export default {
       set: function(value) {
         let tasks = value.map((obj) => Object.assign({}, obj));
         for (const [index, item] of tasks.entries()) {
+          item.statusId = this.id;
           item.sort = index;
         }
-        this.$store.commit('setTasks', tasks);
+        this.$store.dispatch('tasks/updateSort', tasks);
       }
     },
   },
@@ -117,7 +116,7 @@ export default {
     },
     edit: function (id) {
       this.isEdit = true;
-      this.task = Object.assign({}, this.value.find(e => e.id === id));
+      this.task = Object.assign({}, this.tasks.find(e => e.id === id));
       this.modal.show();
     },
     async createTask() {
@@ -125,14 +124,11 @@ export default {
       this.task.sort = this.findTaskIndex(this.task);
       this.$store.dispatch('tasks/addTask', this.task);
       this.modal.hide();
-      this.$emit('saveTask');
     },
     async updateTask() {
-      const updateTask = new UpdateTask();
       this.task.statusId = this.id;
-      await updateTask.process(this.task);
+      this.$store.dispatch('tasks/updateTask', this.task);
       this.modal.hide();
-      this.$emit('saveTask');
     },
     del: function () {
       this.modal.hide();
@@ -143,14 +139,15 @@ export default {
         value.sort = array.indexOf(value);
         return value;
       }, this);
-      const updateSort = new UpdateSort();
-      await updateSort.process(array);
-      this.$emit('updateSort');
+      this.$store.dispatch('tasks/updateSort', array);
     },
-    async updateSort(tasks) {
-      const updateSort = new UpdateSort();
-      await updateSort.process(tasks);
-      this.$emit('updateSort');
+    async updateSort() {
+      const array = this.tasks.map(function(value){
+        value.statusId = this.id;
+        value.sort = array.indexOf(value);
+        return value;
+      }, this);
+      this.$store.dispatch('tasks/updateSort', array);
     },
     findTaskIndex(task) {
       return this.tasks.findIndex(({ id }) => id === task.id) === -1

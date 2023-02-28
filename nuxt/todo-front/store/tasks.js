@@ -1,6 +1,7 @@
 import UpdateSort from '~/src/Command/UpdateSort';
 import CreateTask from '~/src/Command/CreateTask';
 import GetAllTask from '~/src/Query/GetAllTask';
+import UpdateTask from '~/src/Command/UpdateTask';
 
 export const state = () => (
 {
@@ -15,8 +16,6 @@ export const getters = {
 
 export const mutations = {
   setTasks(state, tasks) {
-    const updateSort = new UpdateSort();
-    updateSort.process(tasks);
     state.tasks = tasks;
   }
 };
@@ -27,8 +26,19 @@ export const actions = {
     const response = await getAllTask.process();
     return context.commit('setTasks', await response.json());
   },
+  async updateTask(state, task) {
+    const updateTask = new UpdateTask();
+    await updateTask.process(task);
+    state.dispatch('fetchTasks');
+  },
   async addTask(state, task) {
     const createTask = new CreateTask();
     await createTask.process(task);
+    state.dispatch('fetchTasks');
+  },
+  async updateSort(state, tasks) {
+    const updateSort = new UpdateSort();
+    await updateSort.process(tasks);
+    state.dispatch('fetchTasks');
   }
 }

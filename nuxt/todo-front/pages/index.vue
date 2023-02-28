@@ -6,7 +6,6 @@
         :key="column.id"
         :id="column.id"
         :title="column.name"
-        v-on:saveTask="fetchTask"
       />
     </div>
   </div>
@@ -25,22 +24,6 @@ export default Vue.extend({
     columns() {
       return this.$store.getters["status/status"];
     }
-  },
-  data() {
-    return {
-      sendTaskSort: [
-        {
-          id:'',
-          column: '',
-          sort: '',
-        },
-      ]
-    }
-  },
-  methods: {
-    async fetchTask() {
-      await this.$store.dispatch('tasks/fetchTasks');
-    },
   },
 })
 </script>
